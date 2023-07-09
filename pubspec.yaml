@@ -1,0 +1,52 @@
+name: flight_tracker
+description: An app to check the status of flights
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.3 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  sqflite: ^2.2.8+4
+  flutter_bloc: ^8.1.3
+  bloc: ^8.1.2
+  http: ^1.1.0
+  intl: ^0.18.1
+  font_awesome_flutter: ^10.5.0
+  auto_size_text: ^3.0.0
+  equatable: ^2.0.5
+  flutter_svg: ^2.0.7
+  shared_preferences: ^2.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - asset/json/data.json
+    - asset/json/update.json
+    - asset/json/test/test.json
+    - asset/json/test/updateTest.json
+    - asset/img/splash3.svg
+    - asset/img/splash2.svg
+    - asset/img/splash1.svg
+
+  fonts:
+    - family: RobotoMono
+      fonts:
+        - asset: fonts/RobotoMono-Regular.ttf
+        - asset: fonts/RobotoMono-Light.ttf
+        - asset: fonts/RobotoMono-Medium.ttf
+        - asset: fonts/RobotoMono-Bold.ttf
+          weight: 700
+ 

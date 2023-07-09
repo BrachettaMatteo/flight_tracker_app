@@ -1,0 +1,168 @@
+[
+  {
+    "flight_date": "2023-07-07",
+    "flight_status": "active",
+    "departure": {
+      "airport": "San Francisco International",
+      "timezone": "America/Los_Angeles",
+      "iata": "SFO",
+      "icao": "KSFO",
+      "terminal": "2",
+      "gate": "D11",
+      "delay": 3,
+      "scheduled": "2023-07-10T04:20:00+00:00",
+      "estimated": "2023-07-10T04:20:00+00:00",
+      "actual": "2023-07-07T04:20:13+00:00",
+      "estimated_runway": "2023-07-07T04:20:13+00:00",
+      "actual_runway": "2023-07-07T04:20:13+00:00"
+    },
+    "arrival": {
+      "airport": "Fort Worth International",
+      "timezone": "America/Chicago",
+      "iata": "DFW",
+      "icao": "KDFW",
+      "terminal": "A",
+      "gate": "A22",
+      "baggage": "A17",
+      "delay": 0,
+      "scheduled": "2023-07-10T04:20:00+00:00",
+      "estimated": "2023-07-10T04:20:00+00:00",
+      "actual": null,
+      "estimated_runway": null,
+      "actual_runway": null
+    },
+    "airline": {
+      "name": "American Airlines",
+      "iata": "AA",
+      "icao": "AAL"
+    },
+    "flight": {
+      "number": "1004",
+      "iata": "AA1004",
+      "icao": "AAL1004",
+      "codeshared": null
+    },
+    "aircraft": {
+      "registration": "N160AN",
+      "iata": "A321",
+      "icao": "A321",
+      "icao24": "A0F1BB"
+    },
+    "live": {
+      "updated": "2023-07-07T10:00:00+00:00",
+      "latitude": 36.2856,
+      "longitude": -106.807,
+      "altitude": 8846.82,
+      "direction": 114.34,
+      "speed_horizontal": 894.348,
+      "speed_vertical": 1.188,
+      "is_ground": false
+    }
+  },
+  {
+    "flight_date": "2023-07-06",
+    "flight_status": "scheduled",
+    "departure": {
+      "airport": "Kingsford Smith",
+      "timezone": "Australia/Sydney",
+      "iata": "SYD",
+      "icao": "YSSY",
+      "terminal": "3",
+      "gate": "T3G",
+      "delay": 10,
+      "scheduled": "2023-07-09T08:40:00+00:00",
+      "estimated": "2023-07-09T08:40:00+00:00",
+      "actual": null,
+      "estimated_runway": null,
+      "actual_runway": null
+    },
+    "arrival": {
+      "airport": "Port Macquarie",
+      "timezone": "Australia/Sydney",
+      "iata": "PQQ",
+      "icao": "YPMQ",
+      "terminal": "2",
+      "gate": null,
+      "baggage": null,
+      "delay": null,
+      "scheduled": "2023-07-06T09:40:00+00:00",
+      "estimated": "2023-07-06T09:40:00+00:00",
+      "actual": null,
+      "estimated_runway": null,
+      "actual_runway": null
+    },
+    "airline": {
+      "name": "Emirates",
+      "iata": "EK",
+      "icao": "UAE"
+    },
+    "flight": {
+      "number": "5159",
+      "iata": "EK5159",
+      "icao": "UAE5159",
+      "codeshared": {
+        "airline_name": "qantas",
+        "airline_iata": "qf",
+        "airline_icao": "qfa",
+        "flight_number": "2160",
+        "flight_iata": "qf2160",
+        "flight_icao": "qfa2160"
+      }
+    },
+    "aircraft": null,
+    "live": null
+  },
+  {
+    "flight_date": "2022-02-18",
+    "flight_status": "scheduled",
+    "departure": {
+      "airport": "Kingsford Smith",
+      "timezone": "Australia/Sydney",
+      "iata": "SYD",
+      "icao": "YSSY",
+      "terminal": "3",
+      "gate": "T3G",
+      "delay": 10,
+      "scheduled": "2022-02 18T08:40:00+00:00",
+      "estimated": "2022-02-18T08:40:00+00:00",
+      "actual": null,
+      "estimated_runway": null,
+      "actual_runway": null
+    },
+    "arrival": {
+      "airport": "Port Macquarie",
+      "timezone": "Australia/Sydney",
+      "iata": "PQQ",
+      "icao": "YPMQ",
+      "terminal": "2",
+      "gate": null,
+      "baggage": null,
+      "delay": null,
+      "scheduled": "2022-02-18T09:40:00+00:00",
+      "estimated": "2022-02-18T09:40:00+00:00",
+      "actual": null,
+      "estimated_runway": null,
+      "actual_runway": null
+    },
+    "airline": {
+      "name": "Emirates",
+      "iata": "EK",
+      "icao": "UAE"
+    },
+    "flight": {
+      "number": "5159",
+      "iata": "AB1199",
+      "icao": "UAE5159",
+      "codeshared": {
+        "airline_name": "qantas",
+        "airline_iata": "qf",
+        "airline_icao": "qfa",
+        "flight_number": "2160",
+        "flight_iata": "qf2160",
+        "flight_icao": "qfa2160"
+      }
+    },
+    "aircraft": null,
+    "live": null
+  }
+]
