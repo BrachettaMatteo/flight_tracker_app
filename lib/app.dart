@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'Application/Presentation/add_flight_page.dart';
-import 'Application/Presentation/details_page.dart';
-import 'Application/Presentation/home_page.dart';
-import 'Application/Presentation/welcome_page.dart';
-import 'Data/model/args_detail_page.dart';
-import 'Theme/theme_costum.dart';
+import 'application/presentation/add_flight_page.dart';
+import 'application/presentation/details_page.dart';
+import 'application/presentation/home_page.dart';
+import 'application/presentation/welcome_page.dart';
+import 'data/model/args_detail_page.dart';
+import 'theme/theme_custom.dart';
 
 class MyApp extends StatelessWidget {
   final bool showWelcomePage;
@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flight Tracker',
       initialRoute: showWelcomePage ? WelcomePage.route : HomePage.route,
-      theme: ThemeCostum().lightTheme,
-      darkTheme: ThemeCostum().dark,
+      theme: ThemeCustom().lightTheme,
+      darkTheme: ThemeCustom().dark,
       onGenerateRoute: (settings) {
         final routes = {
           HomePage.route: (_) => const HomePage(),

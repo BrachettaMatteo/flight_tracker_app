@@ -1,6 +1,6 @@
-import 'package:flight_tracker/Data/model/flight.dart';
+import '../../data/model/flight.dart';
 
-/// Repository for rappresent the Database
+/// Repository for represent the Database
 abstract class DatabaseRepository {
   String get fieldDelay;
 
@@ -13,7 +13,7 @@ abstract class DatabaseRepository {
   String get fieldNote;
 
   String get fieldNameAirport;
-  String get fieldidAirport;
+  String get fieldIdAirport;
   String get fieldTerminalAirport;
   String get fieldGateAirport;
   String get fieldTimeEstimatedAirport;
@@ -24,5 +24,5 @@ abstract class DatabaseRepository {
   Future<void> removeFlight(Flight flight);
 
   Future<void> updateFlight(Flight flight);
-  Future<void> updateNoteFligth(Flight flight, String note);
+  Future<void> updateNoteFlight(Flight flight, String note);
 }

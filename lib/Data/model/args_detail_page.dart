@@ -1,6 +1,6 @@
 import 'flight.dart';
 
-/// Argument class for rappresenting the parametre of route [AirportDetails.route]
+/// Argument class for representing the parameters of route [AirportDetails.route]
 class ArgsDetailsPage {
   final Flight flight;
 

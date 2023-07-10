@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../application/business_logic/bloc/flight_tracker_bloc.dart';
 import '../../core/Utility_UI.dart';
-import '../BusinessLogic/bloc/flight_tracker_bloc.dart';
-import 'components/label_section.dart';
 import 'home_page.dart';
 
 class AddFlightPage extends StatefulWidget {
@@ -19,14 +18,16 @@ class AddFlightPage extends StatefulWidget {
 class _AddFlightPageState extends State<AddFlightPage> {
   late TextEditingController _editingController;
   late GlobalKey<FormFieldState> _formFieldKey;
+  late DateTime date;
+
   @override
   void initState() {
     _editingController = TextEditingController();
     _formFieldKey = GlobalKey<FormFieldState>();
+    date = DateTime.now();
     super.initState();
   }
 
-  DateTime date = DateTime.now();
   void _showDialog(Widget child) {
     showCupertinoModalPopup<void>(
       context: context,
@@ -51,11 +52,11 @@ class _AddFlightPageState extends State<AddFlightPage> {
       body: CustomScrollView(slivers: <Widget>[
         UtilityUI.appBarCostum(
             context: context, title1: "New", title2: "Flight"),
-        const LabelSection(label: "Number Flight"),
+        UtilityUI.labelSection(label: "Number Flight"),
         _divider(),
         _inputNumberFlight(),
         _divider(),
-        const LabelSection(label: "Date Flight"),
+        UtilityUI.labelSection(label: "Date Flight"),
         _divider(),
         _inputDateFlight(),
         _divider(),

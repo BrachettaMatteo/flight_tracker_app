@@ -1,16 +1,17 @@
 import 'dart:convert';
+
 import 'package:flutter/services.dart';
 
-import '../Domain/Repository/flight_tracker_api_repository.dart';
-import 'model/airport_detail.dart';
-import 'model/flight.dart';
+import '../data/model/airport_detail.dart';
+import '../data/model/flight.dart';
+import '../domain/repository/flight_tracker_api_repository.dart';
 
 /// Api for local storage, json structure is the same as aviation stack
-class FligthTrackerApiLocal extends FightTrackerApiRepository {
+class FlightTrackerApiLocal extends FightTrackerApiRepository {
   final String pathJsonResource;
   final String pathJsonResourceUpdate;
 
-  FligthTrackerApiLocal(
+  FlightTrackerApiLocal(
       {required this.pathJsonResource, required this.pathJsonResourceUpdate});
 
   @override
@@ -29,8 +30,7 @@ class FligthTrackerApiLocal extends FightTrackerApiRepository {
   @override
   String get fieldTimeEstimatedAirport => "estimated";
   @override
-  String get fieldidAirport => "iata";
-  String personalAccesKey = "";
+  String get fieldIdAirport => "iata";
   @override
   String get fieldDelay => "delay";
   @override
@@ -46,9 +46,9 @@ class FligthTrackerApiLocal extends FightTrackerApiRepository {
     return el != null
         ? Flight(
             id: el[locationId][fieldId],
-            aiportDeparture: AirportDetails(
-                iata: el[fieldMapAirportDetailDeparture][fieldidAirport] ?? "-",
-                nameAriport:
+            airportDeparture: AirportDetails(
+                iata: el[fieldMapAirportDetailDeparture][fieldIdAirport] ?? "-",
+                nameAirport:
                     el[fieldMapAirportDetailDeparture][fieldNameAirport] ?? "-",
                 terminal: el[fieldMapAirportDetailDeparture]
                         [fieldTerminalAirport] ??
@@ -60,8 +60,8 @@ class FligthTrackerApiLocal extends FightTrackerApiRepository {
                         [fieldTimeEstimatedAirport]),
                 delay: el[fieldMapAirportDetailDeparture][fieldDelay] ?? 0),
             airportArrival: AirportDetails(
-                iata: el[fieldMapAirportDetailArrival][fieldidAirport] ?? "-",
-                nameAriport:
+                iata: el[fieldMapAirportDetailArrival][fieldIdAirport] ?? "-",
+                nameAirport:
                     el[fieldMapAirportDetailArrival][fieldNameAirport] ?? "-",
                 terminal: el[fieldMapAirportDetailArrival]
                         [fieldTerminalAirport] ??

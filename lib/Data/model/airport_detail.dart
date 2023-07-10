@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import '../../core/utility.dart';
 import '../my_db.dart';
 
-/// Rappresent the necessary information of airport.
+/// Represent the necessary information of airport.
 @immutable
 class AirportDetails {
   final String iata;
-  final String nameAriport;
+  final String nameAirport;
   final String terminal;
   final String gate;
   final DateTime estimateArrival;
@@ -15,17 +15,17 @@ class AirportDetails {
 
   const AirportDetails(
       {required this.iata,
-      required this.nameAriport,
+      required this.nameAirport,
       required this.terminal,
       required this.gate,
       required this.estimateArrival,
       required this.delay});
 
   factory AirportDetails.fromJson(
-          {required Map<String, dynamic> json, required TypeAirpot type}) =>
+          {required Map<String, dynamic> json, required TypeAirport type}) =>
       AirportDetails(
-          iata: json[Utility.db!.fieldidAirport + type.name],
-          nameAriport: json[Utility.db!.fieldNameAirport + type.name],
+          iata: json[Utility.db!.fieldIdAirport + type.name],
+          nameAirport: json[Utility.db!.fieldNameAirport + type.name],
           terminal: json[Utility.db!.fieldTerminalAirport + type.name],
           gate: json[Utility.db!.fieldGateAirport + type.name],
           estimateArrival: DateTime.fromMillisecondsSinceEpoch(
@@ -33,9 +33,9 @@ class AirportDetails {
           ),
           delay: json[Utility.db!.fieldDelay + type.name]);
 
-  Map<String, dynamic> toJson({required TypeAirpot type}) => {
-        Utility.db!.fieldidAirport + type.name: iata,
-        Utility.db!.fieldNameAirport + type.name: nameAriport,
+  Map<String, dynamic> toJson({required TypeAirport type}) => {
+        Utility.db!.fieldIdAirport + type.name: iata,
+        Utility.db!.fieldNameAirport + type.name: nameAirport,
         Utility.db!.fieldTerminalAirport + type.name: terminal,
         Utility.db!.fieldGateAirport + type.name: gate,
         Utility.db!.fieldTimeEstimatedAirport + type.name:
@@ -43,11 +43,11 @@ class AirportDetails {
         Utility.db!.fieldDelay + type.name: delay
       };
 
-  AirportDetails copyWith(String? iata, String? nameAriport, String? terminal,
+  AirportDetails copyWith(String? iata, String? nameAirport, String? terminal,
           String? gate, DateTime? estimateArrival, int? delay) =>
       AirportDetails(
           iata: iata ?? this.iata,
-          nameAriport: nameAriport ?? this.nameAriport,
+          nameAirport: nameAirport ?? this.nameAirport,
           terminal: terminal ?? this.terminal,
           gate: gate ?? this.gate,
           estimateArrival: estimateArrival ?? this.estimateArrival,
@@ -55,8 +55,8 @@ class AirportDetails {
   @override
   String toString() => (StringBuffer()
         ..writeln("iata: $iata")
-        ..writeln("name: $nameAriport")
-        ..writeln("termianl: $terminal")
+        ..writeln("name: $nameAirport")
+        ..writeln("terminal: $terminal")
         ..writeln("gate: $gate")
         ..writeln("estimateArrival: ${estimateArrival.toString()}")
         ..writeln("delay: $delay"))
@@ -67,7 +67,7 @@ class AirportDetails {
       identical(this, other) ||
       other is AirportDetails &&
           iata == other.iata &&
-          nameAriport == other.nameAriport &&
+          nameAirport == other.nameAirport &&
           terminal == other.terminal &&
           gate == other.gate &&
           estimateArrival == other.estimateArrival &&

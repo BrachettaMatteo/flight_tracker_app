@@ -1,17 +1,16 @@
 import 'dart:developer';
 
+import 'package:flight_tracker/application/presentation/components/element_list_flight.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../Data/model/args_detail_page.dart';
-import '../../Data/model/flight.dart';
+import '../../application/business_logic/bloc/flight_tracker_bloc.dart';
+import '../../application/presentation/add_flight_page.dart';
+import '../../application/presentation/details_page.dart';
 import '../../core/utility_ui.dart';
-import '../BusinessLogic/bloc/flight_tracker_bloc.dart';
-import 'add_flight_page.dart';
-import 'components/label_section.dart';
-import 'components/list_costum.dart';
-import 'details_page.dart';
+import '../../data/model/args_detail_page.dart';
+import '../../data/model/flight.dart';
 
 class HomePage extends StatelessWidget {
   static String route = "/";
@@ -29,7 +28,7 @@ class HomePage extends StatelessWidget {
         listener: (context, state) {
           log("check listen");
           if (state is FlightTrackerStateStatus) {
-            log("call status: ${state.message}");
+            log("call status: ${state.message} -> ${state.status}");
             ScaffoldMessenger.of(context).showSnackBar(UtilityUI.snackBar(
                 status: state.status, message: state.message));
           }
@@ -48,7 +47,7 @@ class HomePage extends StatelessWidget {
               _emptyFlights(context);
             }
             return CustomScrollView(slivers: <Widget>[
-              UtilityUI.appBarCostum(
+              UtilityUI.appBarCustom(
                   context: context, title1: "Flight", title2: "Tracker"),
               ..._getElementSection(labelText: "Today", list: state.today),
               ..._getElementSection(
@@ -67,7 +66,7 @@ class HomePage extends StatelessWidget {
   FloatingActionButton _floatingButton(BuildContext context) =>
       FloatingActionButton(
         onPressed: () => Navigator.of(context).pushNamed(AddFlightPage.route),
-        child: UtilityUI.iconCostum,
+        child: UtilityUI.iconCustom,
       );
 
   List<Widget> _getElementSection(
@@ -76,10 +75,10 @@ class HomePage extends StatelessWidget {
       double? opacity}) {
     if (list.isNotEmpty) {
       return [
-        LabelSection(
+        UtilityUI.labelSection(
           label: labelText,
         ),
-        ListCostum(
+        ElementListFlight(
           listFlight: list,
           opacity: opacity,
         ),

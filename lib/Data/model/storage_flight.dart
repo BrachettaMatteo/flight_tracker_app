@@ -1,9 +1,9 @@
-import '../../Domain/Repository/database_repository.dart';
-import '../../Domain/Repository/flight_tracker_api_repository.dart';
 import '../../core/utility.dart';
-import 'flight.dart';
+import '../../data/model/flight.dart';
+import '../../domain/repository/database_repository.dart';
+import '../../domain/repository/flight_tracker_api_repository.dart';
 
-/// Rappresent the repository for Storage flight.
+/// Represent the repository for Storage flight.
 /// It content action for manage list fo blok
 class StorageFlight {
   final DatabaseRepository db;
@@ -67,16 +67,16 @@ class StorageFlight {
     DateTime now = DateTime.now();
     return _storage
         .where((element) =>
-            element.aiportDeparture.estimateArrival.year == now.year &&
-            element.aiportDeparture.estimateArrival.month == now.month &&
-            element.aiportDeparture.estimateArrival.day == now.day)
+            element.airportDeparture.estimateArrival.year == now.year &&
+            element.airportDeparture.estimateArrival.month == now.month &&
+            element.airportDeparture.estimateArrival.day == now.day)
         .toList();
   }
 
   List<Flight> getFutureFlight() {
     List<Flight> out = _storage
         .where((element) =>
-            element.aiportDeparture.estimateArrival.isAfter(DateTime.now()))
+            element.airportDeparture.estimateArrival.isAfter(DateTime.now()))
         .toList();
     return out.toSet().difference(getTodayFlight().toSet()).toList();
   }

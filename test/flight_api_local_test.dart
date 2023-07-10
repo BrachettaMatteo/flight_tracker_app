@@ -1,7 +1,7 @@
-import 'package:flight_tracker/Data/flight_tracker_api_local.dart';
-import 'package:flight_tracker/Data/model/airport_detail.dart';
-import 'package:flight_tracker/Data/model/flight.dart';
-import 'package:flight_tracker/Domain/Repository/flight_tracker_api_repository.dart';
+import 'package:flight_tracker/data/flight_tracker_api_local.dart';
+import 'package:flight_tracker/data/model/airport_detail.dart';
+import 'package:flight_tracker/data/model/flight.dart';
+import 'package:flight_tracker/domain/repository/flight_tracker_api_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -9,16 +9,16 @@ void main() {
   late FightTrackerApiRepository apiLocal;
   final Flight flightCorrect = Flight(
       id: "EK5159",
-      aiportDeparture: AirportDetails(
+      airportDeparture: AirportDetails(
           iata: "SYD",
-          nameAriport: "Kingsford Smith",
+          nameAirport: "Kingsford Smith",
           terminal: "3",
           gate: "T3G",
           estimateArrival: DateTime.parse("2022-02-18T08:40:00+00:00"),
           delay: 10),
       airportArrival: AirportDetails(
           iata: "PQQ",
-          nameAriport: "Port Macquarie",
+          nameAirport: "Port Macquarie",
           terminal: "2",
           gate: "-",
           estimateArrival: DateTime.parse("2022-02-18T09:40:00+00:00"),
@@ -26,16 +26,16 @@ void main() {
       note: "");
   final Flight flightUpdate = Flight(
       id: "EK5159",
-      aiportDeparture: AirportDetails(
+      airportDeparture: AirportDetails(
           iata: "SYD",
-          nameAriport: "Kingsford Smith",
+          nameAirport: "Kingsford Smith",
           terminal: "3",
           gate: "T3G",
           estimateArrival: DateTime.parse("2022-02-18T10:40:00+00:00"),
           delay: 120),
       airportArrival: AirportDetails(
           iata: "PQQ",
-          nameAriport: "Port Macquarie",
+          nameAirport: "Port Macquarie",
           terminal: "2",
           gate: "-",
           estimateArrival: DateTime.parse("2022-02-18T11:40:00+00:00"),
@@ -44,7 +44,7 @@ void main() {
 
   setUp(() {
     WidgetsFlutterBinding.ensureInitialized();
-    apiLocal = FligthTrackerApiLocal(
+    apiLocal = FlightTrackerApiLocal(
         pathJsonResource: "asset/test.json",
         pathJsonResourceUpdate: "asset/updateTest.json");
   });

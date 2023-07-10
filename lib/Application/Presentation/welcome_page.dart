@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'home_page.dart';
 
 class WelcomePage extends StatefulWidget {
-  static String route = "/welocome";
+  static String route = "/welcome";
   const WelcomePage({super.key});
 
   @override

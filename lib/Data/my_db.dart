@@ -1,10 +1,11 @@
 import 'dart:developer';
+
 import 'package:sqflite/sqflite.dart';
 
-import '../Domain/Repository/database_repository.dart';
-import 'model/flight.dart';
+import '../data/model/flight.dart';
+import '../domain/repository/database_repository.dart';
 
-/// Perisnal db for save data in local device
+/// Personal db for save data in local device
 class MyDB implements DatabaseRepository {
   late final Database db;
   @override
@@ -29,7 +30,7 @@ class MyDB implements DatabaseRepository {
   String get fieldTimeEstimatedAirport => "estimated";
 
   @override
-  String get fieldidAirport => "iata";
+  String get fieldIdAirport => "iata";
   @override
   String get nameDb => "FlightTracker.db";
 
@@ -37,8 +38,8 @@ class MyDB implements DatabaseRepository {
   String get nameTable => "FlightTracker";
   @override
   String get fieldNote => "note";
-  TypeAirpot get destinationType => TypeAirpot.arrival;
-  TypeAirpot get startType => TypeAirpot.departure;
+  TypeAirport get destinationType => TypeAirport.arrival;
+  TypeAirport get startType => TypeAirport.departure;
   @override
   String get fieldDelay => "delay";
 
@@ -50,13 +51,13 @@ class MyDB implements DatabaseRepository {
         CREATE TABLE $nameTable(
           $fieldId TEXT PRIMARY KEY,
           ${fieldNameAirport + destinationType.name} TEXT NOT NULL,
-          ${fieldidAirport + destinationType.name} TEXT NOT NULL,
+          ${fieldIdAirport + destinationType.name} TEXT NOT NULL,
           ${fieldGateAirport + destinationType.name} TEXT NOT NULL,
           ${fieldTerminalAirport + destinationType.name} TEXT NOT NULL,
           ${fieldTimeEstimatedAirport + destinationType.name} INTEGER NOT NULL,
            ${fieldDelay + destinationType.name} INTEGER NOT NULL,
           ${fieldNameAirport + startType.name} TEXT NOT NULL,
-          ${fieldidAirport + startType.name} TEXT NOT NULL,
+          ${fieldIdAirport + startType.name} TEXT NOT NULL,
           ${fieldGateAirport + startType.name} TEXT NOT NULL,
           ${fieldTerminalAirport + startType.name} TEXT NOT NULL,
           ${fieldTimeEstimatedAirport + startType.name} INTEGER NOT NULL,
@@ -92,7 +93,7 @@ class MyDB implements DatabaseRepository {
   }
 
   @override
-  Future<void> updateNoteFligth(Flight flight, String note) async {
+  Future<void> updateNoteFlight(Flight flight, String note) async {
     await db.rawUpdate('''
     UPDATE $nameTable 
     SET $fieldNote = ?
@@ -101,4 +102,4 @@ class MyDB implements DatabaseRepository {
   }
 }
 
-enum TypeAirpot { departure, arrival }
+enum TypeAirport { departure, arrival }

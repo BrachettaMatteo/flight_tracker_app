@@ -123,8 +123,8 @@
       "terminal": "3",
       "gate": "T3G",
       "delay": 10,
-      "scheduled": "2022-02 18T08:40:00+00:00",
-      "estimated": "2022-02-18T08:40:00+00:00",
+      "scheduled": "2023-11-18T08:40:00+00:00",
+      "estimated": "2023-11-18T08:40:00+00:00",
       "actual": null,
       "estimated_runway": null,
       "actual_runway": null
@@ -138,8 +138,8 @@
       "gate": null,
       "baggage": null,
       "delay": null,
-      "scheduled": "2022-02-18T09:40:00+00:00",
-      "estimated": "2022-02-18T09:40:00+00:00",
+      "scheduled": "2023-11-18T09:40:00+00:00",
+      "estimated": "2023-11-18T09:40:00+00:00",
       "actual": null,
       "estimated_runway": null,
       "actual_runway": null

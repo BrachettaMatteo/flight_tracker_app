@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../Data/model/args_detail_page.dart';
-import '../../Data/model/flight.dart';
+import '../../data/model/args_detail_page.dart';
+import '../../data/model/flight.dart';
 import '../../core/Utility_UI.dart';
-import '../BusinessLogic/bloc/flight_tracker_bloc.dart';
-import 'DetailsPage/Clipper/costum_footer_clipper.dart';
-import 'DetailsPage/Clipper/costum_header_clipper.dart';
+import '../business_logic/bloc/flight_tracker_bloc.dart';
+import 'details_page/clipper/custom_footer_clipper.dart';
+import 'details_page/clipper/custom_header_clipper.dart';
 
 class DetailsPage extends StatefulWidget {
   static String route = "/detailsPage";
@@ -48,7 +48,7 @@ class _DetailsPageState extends State<DetailsPage> {
           dragStartBehavior: DragStartBehavior.down,
           slivers: <Widget>[
             _header(),
-            _numeberFlight(),
+            _numberFlight(),
             _infoGrid(),
           ]),
       floatingActionButton: _addNote(),
@@ -58,9 +58,9 @@ class _DetailsPageState extends State<DetailsPage> {
 
   Widget _header() => SliverToBoxAdapter(
         child: ClipPath(
-          clipper: CostumHeaderCLip(),
+          clipper: CustomHeaderCLip(),
           child: Container(
-            color: flight.aiportDeparture.delay > 5
+            color: flight.airportDeparture.delay > 5
                 ? Colors.red.shade400
                 : Colors.green.shade400,
             height: MediaQuery.of(context).size.height * 0.4,
@@ -74,17 +74,17 @@ class _DetailsPageState extends State<DetailsPage> {
                     child: Align(
                         alignment: Alignment.topLeft,
                         child: _getInfoAirport(
-                            nameAirport: flight.aiportDeparture.nameAriport,
-                            iata: flight.aiportDeparture.iata,
+                            nameAirport: flight.airportDeparture.nameAirport,
+                            iata: flight.airportDeparture.iata,
                             alingText: CrossAxisAlignment.start)),
                   ),
-                  UtilityUI.iconCostum,
+                  UtilityUI.iconCustom,
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
                     child: Align(
                         alignment: Alignment.bottomRight,
                         child: _getInfoAirport(
-                            nameAirport: flight.airportArrival.nameAriport,
+                            nameAirport: flight.airportArrival.nameAirport,
                             iata: flight.airportArrival.iata,
                             alingText: CrossAxisAlignment.end)),
                   ),
@@ -121,11 +121,11 @@ class _DetailsPageState extends State<DetailsPage> {
         _infoElement(
             label: "Departure",
             value: DateFormat('HH:mm')
-                .format(flight.aiportDeparture.estimateArrival)),
+                .format(flight.airportDeparture.estimateArrival)),
         _infoElement(
             label: "Gate / Terminal",
             value:
-                "${flight.aiportDeparture.gate} - ${flight.aiportDeparture.terminal}"),
+                "${flight.airportDeparture.gate} - ${flight.airportDeparture.terminal}"),
         _infoElement(
             label: "Arrival",
             value: DateFormat('HH:mm')
@@ -161,7 +161,7 @@ class _DetailsPageState extends State<DetailsPage> {
     );
   }
 
-  Widget _numeberFlight() => SliverToBoxAdapter(
+  Widget _numberFlight() => SliverToBoxAdapter(
         child: Column(children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
@@ -173,7 +173,7 @@ class _DetailsPageState extends State<DetailsPage> {
       );
 
   Widget _addNote() => ClipPath(
-        clipper: CostumFooterClipper(),
+        clipper: CustomFooterClipper(),
         child: Container(
             height: 150,
             decoration: BoxDecoration(

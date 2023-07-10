@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import '../Domain/Repository/flight_tracker_api_repository.dart';
-import 'model/airport_detail.dart';
-import 'model/flight.dart';
+import '../data/model/airport_detail.dart';
+import '../data/model/flight.dart';
+import '../domain/repository/flight_tracker_api_repository.dart';
 
 /// API for Aviationstack(https://aviationstack.com)
-class FlightTrackerApiaviationstack extends FightTrackerApiRepository {
+class FlightTrackerApiAviationstack extends FightTrackerApiRepository {
   @override
   String get fieldGateAirport => "gate";
 
@@ -30,23 +30,23 @@ class FlightTrackerApiaviationstack extends FightTrackerApiRepository {
   String get fieldTimeEstimatedAirport => "estimated";
 
   @override
-  String get fieldidAirport => "iata";
-  String personalAccesKey = "";
+  String get fieldIdAirport => "iata";
+  String personalAccessKey = "";
   @override
   String get fieldDelay => "delay";
 
   @override
   Future<Flight?> getFlightById(String idFlight) async {
     var url = Uri.https('api.aviationstack.com', '/v1/flights',
-        {'access_key': personalAccesKey, 'flight_iata': idFlight});
+        {'access_key': personalAccessKey, 'flight_iata': idFlight});
     final response = await http.get(url);
     if (response.statusCode == 200) {
       Map<String, dynamic> out = await jsonDecode(response.body);
       return Flight(
           id: out[locationId][fieldId],
-          aiportDeparture: AirportDetails(
-              iata: out[fieldMapAirportDetailDeparture][fieldidAirport] ?? "-",
-              nameAriport:
+          airportDeparture: AirportDetails(
+              iata: out[fieldMapAirportDetailDeparture][fieldIdAirport] ?? "-",
+              nameAirport:
                   out[fieldMapAirportDetailDeparture][fieldNameAirport] ?? "-",
               terminal: out[fieldMapAirportDetailDeparture]
                       [fieldTerminalAirport] ??
@@ -57,8 +57,8 @@ class FlightTrackerApiaviationstack extends FightTrackerApiRepository {
                   "-",
               delay: out[fieldMapAirportDetailDeparture][fieldDelay] ?? 0),
           airportArrival: AirportDetails(
-              iata: out[fieldMapAirportDetailArrival][fieldidAirport] ?? "-",
-              nameAriport:
+              iata: out[fieldMapAirportDetailArrival][fieldIdAirport] ?? "-",
+              nameAirport:
                   out[fieldMapAirportDetailArrival][fieldNameAirport] ?? "-",
               terminal:
                   out[fieldMapAirportDetailArrival][fieldTerminalAirport] ?? "",
@@ -79,7 +79,7 @@ class FlightTrackerApiaviationstack extends FightTrackerApiRepository {
     for (Flight flight in listToUpdate) {
       Flight valueUpdate = (await getFlightById(flight.id))!;
       out.add(flight.copyWith(
-          aiportDeparture: valueUpdate.aiportDeparture,
+          airportDeparture: valueUpdate.airportDeparture,
           airportArrival: valueUpdate.airportArrival));
     }
     return out;

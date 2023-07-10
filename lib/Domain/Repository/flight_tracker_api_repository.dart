@@ -1,13 +1,13 @@
-import 'package:flight_tracker/Data/model/flight.dart';
+import '../../data/model/flight.dart';
 
-/// Repository for rappresent the implementation of api
+/// Repository for represent the implementation of api
 abstract class FightTrackerApiRepository {
   String get fieldId;
   String get fieldMapAirportDetailDeparture;
   String get fieldMapAirportDetailArrival;
   String get fieldDelay;
   String get fieldNameAirport;
-  String get fieldidAirport;
+  String get fieldIdAirport;
   String get fieldTerminalAirport;
   String get fieldGateAirport;
   String get fieldTimeEstimatedAirport;
