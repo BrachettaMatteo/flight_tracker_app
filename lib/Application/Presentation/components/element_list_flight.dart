@@ -4,9 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../application/business_logic/bloc/flight_tracker_bloc.dart';
-import '../../../data/model/args_detail_page.dart';
 import '../../../data/model/flight.dart';
-import '../details_page.dart';
 
 class ElementListFlight extends StatefulWidget {
   final List<Flight> listFlight;
@@ -31,7 +29,7 @@ class _ElementListFlightState extends State<ElementListFlight> {
             },
             itemCount: widget.listFlight.length + 2,
           )
-        : SliverToBoxAdapter(child: Container());
+        : const SliverToBoxAdapter(child: SizedBox());
   }
 
   String _getTime(
@@ -52,11 +50,6 @@ class _ElementListFlightState extends State<ElementListFlight> {
     //update flight
     BlocProvider.of<FlightTrackerBloc>(context)
         .add(FlightTrackerEventUpdateFlight(flight: flight));
-    final state = BlocProvider.of<FlightTrackerBloc>(context).state;
-    if (state is FlightTrackerStateFlightUpdate) {
-      Navigator.of(context).pushNamed(DetailsPage.route,
-          arguments: ArgsDetailsPage(state.flight));
-    }
   }
 
   Widget elementFlight({required Flight flight}) => Dismissible(

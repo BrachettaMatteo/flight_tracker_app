@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,18 +51,34 @@ class _AddFlightPageState extends State<AddFlightPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(slivers: <Widget>[
-        UtilityUI.appBarCostum(
-            context: context, title1: "New", title2: "Flight"),
-        UtilityUI.labelSection(label: "Number Flight"),
-        _divider(),
-        _inputNumberFlight(),
-        _divider(),
-        UtilityUI.labelSection(label: "Date Flight"),
-        _divider(),
-        _inputDateFlight(),
-        _divider(),
-      ]),
+      body: BlocListener<FlightTrackerBloc, FlightTrackerState>(
+        listenWhen: (previous, current) =>
+            previous != current &&
+            current is FlightTrackerStateFlightAddedStatus,
+        listener: (context, state) {
+          if (state is FlightTrackerStateFlightAddedStatus) {
+            log("call flight ${state.status.toString()}");
+            ScaffoldMessenger.of(context).showSnackBar(UtilityUI.snackBar(
+                status: state.status, message: state.message));
+            if (state.status == Status.done) {
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil(HomePage.route, (route) => false);
+            }
+          }
+        },
+        child: CustomScrollView(slivers: <Widget>[
+          UtilityUI.appBarCustom(
+              context: context, title1: "New", title2: "Flight"),
+          UtilityUI.labelSection(label: "Number Flight"),
+          _divider(),
+          _inputNumberFlight(),
+          _divider(),
+          UtilityUI.labelSection(label: "Date Flight"),
+          _divider(),
+          _inputDateFlight(),
+          _divider(),
+        ]),
+      ),
       floatingActionButton: _btnAddFLight(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
@@ -78,7 +96,7 @@ class _AddFlightPageState extends State<AddFlightPage> {
                 return 'Please enter some text';
               }
               if ((value ?? "").length < 5) {
-                return "insert IATA of lfight";
+                return "insert IATA of flight";
               }
               return null;
             },
@@ -124,8 +142,6 @@ class _AddFlightPageState extends State<AddFlightPage> {
             BlocProvider.of<FlightTrackerBloc>(context).add(
                 FlightTrackerEventAddFlight(
                     idFlight: _editingController.text.trim().toUpperCase()));
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil(HomePage.route, (route) => false);
           }
         },
         style: ButtonStyle(

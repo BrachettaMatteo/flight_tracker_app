@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flight_tracker/application/presentation/components/element_list_flight.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,12 +21,10 @@ class HomePage extends StatelessWidget {
           child: BlocConsumer<FlightTrackerBloc, FlightTrackerState>(
         listenWhen: (previous, current) =>
             previous != current &&
-            (current is FlightTrackerStateStatus ||
+            (current is FlightTrackerStateFlightDeletedStatus ||
                 current is FlightTrackerStateFlightUpdate),
         listener: (context, state) {
-          log("check listen");
-          if (state is FlightTrackerStateStatus) {
-            log("call status: ${state.message} -> ${state.status}");
+          if (state is FlightTrackerStateFlightDeletedStatus) {
             ScaffoldMessenger.of(context).showSnackBar(UtilityUI.snackBar(
                 status: state.status, message: state.message));
           }
@@ -44,7 +40,11 @@ class HomePage extends StatelessWidget {
             if (state.future.isEmpty &&
                 state.past.isEmpty &&
                 state.today.isEmpty) {
-              _emptyFlights(context);
+              return CustomScrollView(slivers: <Widget>[
+                UtilityUI.appBarCustom(
+                    context: context, title1: "Flight", title2: "Tracker"),
+                _emptyFlights(context)
+              ]);
             }
             return CustomScrollView(slivers: <Widget>[
               UtilityUI.appBarCustom(
@@ -88,16 +88,18 @@ class HomePage extends StatelessWidget {
     return [const SliverToBoxAdapter(child: SizedBox())];
   }
 
-  _emptyFlights(BuildContext context) => Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            SvgPicture.asset(
-              "asset/img/splash1.svg",
-              width: MediaQuery.of(context).size.width * 0.9,
-            ),
-            const Text("add flights to see the progress"),
-          ],
+  _emptyFlights(BuildContext context) => SliverFillRemaining(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SvgPicture.asset(
+                "asset/img/splash1.svg",
+                width: MediaQuery.of(context).size.width * 0.9,
+              ),
+              const Text("add flights to see tracking"),
+            ],
+          ),
         ),
       );
 }

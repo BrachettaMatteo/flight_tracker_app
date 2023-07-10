@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -38,14 +37,11 @@ class FlightTrackerBloc extends Bloc<FlightTrackerEvent, FlightTrackerState> {
 
   FutureOr<void> _addFlight(FlightTrackerEventAddFlight event,
       Emitter<FlightTrackerState> emit) async {
-    //bool response = await storageFlight.addById(idFlight: event.idFlight);
-
     if (await storageFlight.addById(idFlight: event.idFlight)) {
-      log("emit flight add");
-      emit(
-          FlightTrackerStateStatus(message: "flight add", status: Status.done));
+      emit(FlightTrackerStateFlightAddedStatus(
+          message: "flight add", status: Status.done));
     } else {
-      emit(FlightTrackerStateStatus(
+      emit(FlightTrackerStateFlightAddedStatus(
           message: "error add fight", status: Status.error));
     }
     emit(FlightTrackerStateLoaded(
@@ -67,10 +63,10 @@ class FlightTrackerBloc extends Bloc<FlightTrackerEvent, FlightTrackerState> {
       Emitter<FlightTrackerState> emit) async {
     //list release
     if (await storageFlight.remove(flight: event.flight)) {
-      emit(FlightTrackerStateStatus(
+      emit(FlightTrackerStateFlightDeletedStatus(
           message: "flight ${event.flight.id} remove ", status: Status.done));
     } else {
-      emit(FlightTrackerStateStatus(
+      emit(FlightTrackerStateFlightDeletedStatus(
           message: "error remove flight", status: Status.error));
     }
     emit(FlightTrackerStateLoaded(

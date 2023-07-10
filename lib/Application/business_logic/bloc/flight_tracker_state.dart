@@ -26,11 +26,23 @@ class FlightTrackerStateFlightUpdate extends FlightTrackerState {
   List<Object?> get props => [flight];
 }
 
-class FlightTrackerStateStatus extends FlightTrackerState {
+class FlightTrackerStateFlightAddedStatus extends FlightTrackerState {
   final String message;
   final Status status;
 
-  FlightTrackerStateStatus({this.message = "", this.status = Status.notStatus});
+  FlightTrackerStateFlightAddedStatus(
+      {this.message = "", this.status = Status.notStatus});
+
+  @override
+  List<Object?> get props => [message, status];
+}
+
+class FlightTrackerStateFlightDeletedStatus extends FlightTrackerState {
+  final String message;
+  final Status status;
+
+  FlightTrackerStateFlightDeletedStatus(
+      {this.message = "", this.status = Status.notStatus});
 
   @override
   List<Object?> get props => [message, status];
