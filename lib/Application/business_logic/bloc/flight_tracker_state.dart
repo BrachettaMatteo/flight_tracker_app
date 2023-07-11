@@ -48,4 +48,13 @@ class FlightTrackerStateFlightDeletedStatus extends FlightTrackerState {
   List<Object?> get props => [message, status];
 }
 
+class FlightTrackerStateFlightOpenDetail extends FlightTrackerState {
+  final Flight flight;
+
+  FlightTrackerStateFlightOpenDetail(this.flight);
+
+  @override
+  List<Object?> get props => [flight];
+}
+
 enum Status { error, done, notStatus }

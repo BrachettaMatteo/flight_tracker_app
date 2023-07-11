@@ -13,8 +13,7 @@ import 'details_page/clipper/custom_header_clipper.dart';
 
 @RoutePage()
 class DetailsPage extends StatefulWidget {
-  final Flight flight;
-  const DetailsPage({super.key, required this.flight});
+  const DetailsPage({super.key});
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
@@ -29,9 +28,13 @@ class _DetailsPageState extends State<DetailsPage> {
   void initState() {
     _controllerNote = TextEditingController();
     _noteFocusNode = FocusNode();
-    flight = widget.flight;
-    oldValue = flight.note;
-    _controllerNote.text = oldValue;
+
+    final state = BlocProvider.of<FlightTrackerBloc>(context).state;
+    if (state is FlightTrackerStateFlightOpenDetail) {
+      flight = state.flight;
+      oldValue = state.flight.note;
+      _controllerNote.text = oldValue;
+    }
     super.initState();
   }
 

@@ -78,14 +78,22 @@ class StorageFlight {
         .where((element) =>
             element.airportDeparture.estimateArrival.isAfter(DateTime.now()))
         .toList();
-    return out.toSet().difference(getTodayFlight().toSet()).toList();
+    out.toSet().difference(getTodayFlight().toSet()).toList().sort(
+        (previous, current) => previous.airportDeparture.estimateArrival
+            .compareTo(current.airportDeparture.estimateArrival));
+    return out;
   }
 
-  List<Flight> getPastFlight() => _storage
-      .toSet()
-      .difference(getFutureFlight().toSet())
-      .difference(getTodayFlight().toSet())
-      .toList();
+  List<Flight> getPastFlight() {
+    List<Flight> out = _storage
+        .toSet()
+        .difference(getFutureFlight().toSet())
+        .difference(getTodayFlight().toSet())
+        .toList();
+    out.sort((a, b) => b.airportDeparture.estimateArrival
+        .compareTo(a.airportDeparture.estimateArrival));
+    return out;
+  }
 
   List<Flight> get getStorage => _storage;
   @override
@@ -109,4 +117,23 @@ class StorageFlight {
 
   refresh() async => updateListFlight(
       newList: await api.updateListFlight(listToUpdate: _storage));
+
+  Future<bool> updateNote(Flight flight) async {
+    Flight? f = _storage.where((element) => element.id == flight.id).first;
+    if (f.note != flight.note) {
+      db.updateNoteFlight(flight, flight.note);
+      final index = _storage.indexWhere((element) => element.id == flight.id);
+      _storage[index] = flight;
+      return true;
+    }
+    return false;
+  }
+
+  void replaceFlight({required Flight flight}) {
+    if (containsByid(idFlight: flight.id)) {
+      int index = _storage.indexWhere((element) => element.id == flight.id);
+      _storage.replaceRange(index, index, [_storage[index]]);
+      db.updateFlight(flight);
+    }
+  }
 }

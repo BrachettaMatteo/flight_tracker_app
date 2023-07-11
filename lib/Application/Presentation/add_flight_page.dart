@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
-import 'package:flight_tracker/core/routes/app_router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,11 +54,10 @@ class _AddFlightPageState extends State<AddFlightPage> {
             current is FlightTrackerStateFlightAddedStatus,
         listener: (context, state) {
           if (state is FlightTrackerStateFlightAddedStatus) {
-            log("call flight ${state.status.toString()}");
             ScaffoldMessenger.of(context).showSnackBar(UtilityUI.snackBar(
                 status: state.status, message: state.message));
             if (state.status == Status.done) {
-              context.router.replace(const HomeRoute());
+              context.router.pop();
             }
           }
         },

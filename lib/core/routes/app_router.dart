@@ -1,11 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
 
 import '../../application/presentation/add_flight_page.dart';
 import '../../application/presentation/details_page.dart';
 import '../../application/presentation/home_page.dart';
 import '../../application/presentation/welcome_page.dart';
-import '../../data/model/flight.dart';
 part 'app_router.gr.dart';
 
 @AutoRouterConfig()

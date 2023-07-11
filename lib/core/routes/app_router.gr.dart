@@ -28,13 +28,9 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     DetailsRoute.name: (routeData) {
-      final args = routeData.argsAs<DetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: DetailsPage(
-          key: args.key,
-          flight: args.flight,
-        ),
+        child: const DetailsPage(),
       );
     },
     HomeRoute.name: (routeData) {
@@ -76,40 +72,16 @@ class AddFlightRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [DetailsPage]
-class DetailsRoute extends PageRouteInfo<DetailsRouteArgs> {
-  DetailsRoute({
-    Key? key,
-    required Flight flight,
-    List<PageRouteInfo>? children,
-  }) : super(
+class DetailsRoute extends PageRouteInfo<void> {
+  const DetailsRoute({List<PageRouteInfo>? children})
+      : super(
           DetailsRoute.name,
-          args: DetailsRouteArgs(
-            key: key,
-            flight: flight,
-          ),
           initialChildren: children,
         );
 
   static const String name = 'DetailsRoute';
 
-  static const PageInfo<DetailsRouteArgs> page =
-      PageInfo<DetailsRouteArgs>(name);
-}
-
-class DetailsRouteArgs {
-  const DetailsRouteArgs({
-    this.key,
-    required this.flight,
-  });
-
-  final Key? key;
-
-  final Flight flight;
-
-  @override
-  String toString() {
-    return 'DetailsRouteArgs{key: $key, flight: $flight}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

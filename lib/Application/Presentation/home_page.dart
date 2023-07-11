@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flight_tracker/application/presentation/components/element_list_flight.dart';
 import 'package:flight_tracker/core/routes/app_router.dart';
@@ -20,15 +18,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: BlocConsumer<FlightTrackerBloc, FlightTrackerState>(
+        listenWhen: (previous, current) =>
+            current is FlightTrackerStateFlightDeletedStatus,
         listener: (context, state) {
-          log(state.toString());
           if (state is FlightTrackerStateFlightDeletedStatus) {
             ScaffoldMessenger.of(context).showSnackBar(UtilityUI.snackBar(
                 status: state.status, message: state.message));
-          }
-          if (state is FlightTrackerStateFlightUpdate) {
-            log("analytics homepage bloc listen FlightTrackerStateFlightUpdate");
-            context.router.push(DetailsRoute(flight: state.flight));
           }
         },
         buildWhen: (previous, current) =>

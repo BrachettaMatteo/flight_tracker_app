@@ -23,6 +23,7 @@ class FlightTrackerBloc extends Bloc<FlightTrackerEvent, FlightTrackerState> {
     on<FlightTrackerEventRefreshFlight>(_refreshListFlight);
     on<FlightTrackerEventRemoveFlight>(_removeFlight);
     on<FlightTrackerEventUpdateFlight>(_updateAction);
+    on<FlightTrackerEventOpenDetails>(_openDetails);
   }
 
   FutureOr<void> _initAction(
@@ -77,15 +78,26 @@ class FlightTrackerBloc extends Bloc<FlightTrackerEvent, FlightTrackerState> {
 
   Future<FutureOr<void>> _updateAction(FlightTrackerEventUpdateFlight event,
       Emitter<FlightTrackerState> emit) async {
+    bool response = await storageFlight.updateNote(event.flight);
+    if (response) {
+      emit(FlightTrackerStateLoaded(
+          future: storageFlight.getFutureFlight(),
+          past: storageFlight.getPastFlight(),
+          today: storageFlight.getTodayFlight()));
+    }
+  }
+
+  Future<FutureOr<void>> _openDetails(FlightTrackerEventOpenDetails event,
+      Emitter<FlightTrackerState> emit) async {
     Flight? update = await storageFlight.updateFlight(flight: event.flight);
     if (update != null) {
       emit(FlightTrackerStateLoaded(
           future: storageFlight.getFutureFlight(),
           past: storageFlight.getPastFlight(),
           today: storageFlight.getTodayFlight()));
-      emit(FlightTrackerStateFlightUpdate(flight: update));
+      emit(FlightTrackerStateFlightOpenDetail(update));
     } else {
-      emit(FlightTrackerStateFlightUpdate(flight: event.flight));
+      emit(FlightTrackerStateFlightOpenDetail(event.flight));
     }
   }
 }
