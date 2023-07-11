@@ -1,16 +1,16 @@
 import 'dart:developer';
 
+import 'package:auto_route/auto_route.dart';
+import 'package:flight_tracker/core/routes/app_router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/business_logic/bloc/flight_tracker_bloc.dart';
 import '../../core/Utility_UI.dart';
-import 'home_page.dart';
 
+@RoutePage()
 class AddFlightPage extends StatefulWidget {
-  static const String route = "/addFlight";
-
   const AddFlightPage({super.key});
 
   @override
@@ -61,8 +61,7 @@ class _AddFlightPageState extends State<AddFlightPage> {
             ScaffoldMessenger.of(context).showSnackBar(UtilityUI.snackBar(
                 status: state.status, message: state.message));
             if (state.status == Status.done) {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil(HomePage.route, (route) => false);
+              context.router.replace(const HomeRoute());
             }
           }
         },

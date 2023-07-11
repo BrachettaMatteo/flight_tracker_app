@@ -1,10 +1,10 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flight_tracker/core/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'home_page.dart';
-
+@RoutePage()
 class WelcomePage extends StatefulWidget {
-  static String route = "/welcome";
   const WelcomePage({super.key});
 
   @override
@@ -58,10 +58,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     elevation: const MaterialStatePropertyAll(20),
                     backgroundColor:
                         MaterialStatePropertyAll(Colors.green.shade700)),
-                onPressed: () => {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, HomePage.route, (route) => false)
-                    },
+                onPressed: () => context.router.replace(const HomeRoute()),
                 child: const Text(
                   "go to app",
                   style: TextStyle(color: Colors.white),

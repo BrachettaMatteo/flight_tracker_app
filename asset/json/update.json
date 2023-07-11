@@ -27,7 +27,7 @@
         "baggage": "A17",
         "delay": 0,
         "scheduled": "2023-07-10T04:20:00+00:00",
-        "estimated": "2023-07-10T04:20:00+00:00",
+        "estimated": "2023-07-15T04:20:00+00:00",
         "actual": null,
         "estimated_runway": null,
         "actual_runway": null
