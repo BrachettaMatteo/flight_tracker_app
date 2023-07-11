@@ -11,8 +11,8 @@
         "terminal": "2",
         "gate": "D11",
         "delay": 2,
-        "scheduled": "2023-07-10T04:22:00+00:00",
-        "estimated": "2023-07-10T04:24:00+00:00",
+        "scheduled": "2023-07-11T04:22:00+00:00",
+        "estimated": "2023-07-11T04:24:00+00:00",
         "actual": "2023-07-07T04:20:13+00:00",
         "estimated_runway": "2023-07-07T04:21:13+00:00",
         "actual_runway": "2023-07-07T04:20:13+00:00"
@@ -26,8 +26,8 @@
         "gate": "A22",
         "baggage": "A17",
         "delay": 0,
-        "scheduled": "2023-07-10T04:20:00+00:00",
-        "estimated": "2023-07-10T04:20:00+00:00",
+        "scheduled": "2023-07-11T04:20:00+00:00",
+        "estimated": "2023-07-11T04:20:00+00:00",
         "actual": null,
         "estimated_runway": null,
         "actual_runway": null

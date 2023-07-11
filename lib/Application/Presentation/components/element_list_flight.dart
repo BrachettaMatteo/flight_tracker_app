@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../application/business_logic/bloc/flight_tracker_bloc.dart';
+import '../../../core/routes/app_router.dart';
 import '../../../data/model/flight.dart';
 
 class ElementListFlight extends StatefulWidget {
@@ -47,9 +49,10 @@ class _ElementListFlightState extends State<ElementListFlight> {
   }
 
   void _openDetails({required Flight flight}) {
-    //update flight
     BlocProvider.of<FlightTrackerBloc>(context)
-        .add(FlightTrackerEventUpdateFlight(flight: flight));
+        .add(FlightTrackerEventOpenDetails(flight: flight));
+    //go to detail page
+    context.router.push(const DetailsRoute());
   }
 
   Widget elementFlight({required Flight flight}) => Dismissible(

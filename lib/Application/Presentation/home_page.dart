@@ -1,17 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flight_tracker/application/presentation/components/element_list_flight.dart';
+import 'package:flight_tracker/core/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../application/business_logic/bloc/flight_tracker_bloc.dart';
-import '../../application/presentation/add_flight_page.dart';
-import '../../application/presentation/details_page.dart';
 import '../../core/utility_ui.dart';
-import '../../data/model/args_detail_page.dart';
 import '../../data/model/flight.dart';
 
+@RoutePage()
 class HomePage extends StatelessWidget {
-  static String route = "/";
   const HomePage({super.key});
 
   @override
@@ -20,17 +19,11 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
           child: BlocConsumer<FlightTrackerBloc, FlightTrackerState>(
         listenWhen: (previous, current) =>
-            previous != current &&
-            (current is FlightTrackerStateFlightDeletedStatus ||
-                current is FlightTrackerStateFlightUpdate),
+            current is FlightTrackerStateFlightDeletedStatus,
         listener: (context, state) {
           if (state is FlightTrackerStateFlightDeletedStatus) {
             ScaffoldMessenger.of(context).showSnackBar(UtilityUI.snackBar(
                 status: state.status, message: state.message));
-          }
-          if (state is FlightTrackerStateFlightUpdate) {
-            Navigator.of(context).pushNamed(DetailsPage.route,
-                arguments: ArgsDetailsPage(state.flight));
           }
         },
         buildWhen: (previous, current) =>
@@ -65,7 +58,7 @@ class HomePage extends StatelessWidget {
 
   FloatingActionButton _floatingButton(BuildContext context) =>
       FloatingActionButton(
-        onPressed: () => Navigator.of(context).pushNamed(AddFlightPage.route),
+        onPressed: () => context.router.push(const AddFlightRoute()),
         child: UtilityUI.iconCustom,
       );
 

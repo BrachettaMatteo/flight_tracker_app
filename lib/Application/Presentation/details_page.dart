@@ -1,20 +1,19 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../data/model/args_detail_page.dart';
 import '../../data/model/flight.dart';
 import '../../core/Utility_UI.dart';
 import '../business_logic/bloc/flight_tracker_bloc.dart';
 import 'details_page/clipper/custom_footer_clipper.dart';
 import 'details_page/clipper/custom_header_clipper.dart';
 
+@RoutePage()
 class DetailsPage extends StatefulWidget {
-  static String route = "/detailsPage";
-  final ArgsDetailsPage args;
-  const DetailsPage({super.key, required this.args});
+  const DetailsPage({super.key});
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
@@ -29,9 +28,13 @@ class _DetailsPageState extends State<DetailsPage> {
   void initState() {
     _controllerNote = TextEditingController();
     _noteFocusNode = FocusNode();
-    flight = widget.args.flight;
-    oldValue = flight.note;
-    _controllerNote.text = oldValue;
+
+    final state = BlocProvider.of<FlightTrackerBloc>(context).state;
+    if (state is FlightTrackerStateFlightOpenDetail) {
+      flight = state.flight;
+      oldValue = state.flight.note;
+      _controllerNote.text = oldValue;
+    }
     super.initState();
   }
 

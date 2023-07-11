@@ -28,3 +28,9 @@ class FlightTrackerEventUpdateFlight extends FlightTrackerEvent {
 
   FlightTrackerEventUpdateFlight({required this.flight});
 }
+
+class FlightTrackerEventOpenDetails extends FlightTrackerEvent {
+  final Flight flight;
+
+  FlightTrackerEventOpenDetails({required this.flight});
+}
