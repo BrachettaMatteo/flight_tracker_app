@@ -1,4 +1,4 @@
-# ![Flight_tracker](.github/img/logo.png) Flight tracker
+# ![Flight_tracker](.github/img/logo.svg) Flight tracker
 
 An app to check the status of flights. The default implementation use the json data in local. The data is storage in `asset/data.json`. If run project in Windows or web change the local storage because this implementation use `sqflite`.
 ## Credits

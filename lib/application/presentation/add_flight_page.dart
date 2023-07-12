@@ -139,9 +139,9 @@ class _AddFlightPageState extends State<AddFlightPage> {
                     idFlight: _editingController.text.trim().toUpperCase()));
           }
         },
-        style: ButtonStyle(
-            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10)))),
-        child: Text("add flight".toUpperCase()),
+        child: Text(
+          "add flight".toUpperCase(),
+          style: const TextStyle(color: Colors.white),
+        ),
       ));
 }

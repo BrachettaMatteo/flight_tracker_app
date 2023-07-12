@@ -115,13 +115,6 @@ class WelcomePage extends StatelessWidget {
                 child: Positioned(
                   bottom: 100,
                   child: ElevatedButton(
-                      style: ButtonStyle(
-                          elevation: const MaterialStatePropertyAll(10),
-                          shape: MaterialStatePropertyAll(
-                              ContinuousRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20))),
-                          backgroundColor: MaterialStatePropertyAll(
-                              Theme.of(context).primaryColor)),
                       onPressed: () =>
                           context.router.replace(const HomeRoute()),
                       child: const Text(
