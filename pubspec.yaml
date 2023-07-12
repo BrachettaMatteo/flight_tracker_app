@@ -23,6 +23,7 @@ dependencies:
   flutter_svg: ^2.0.7
   shared_preferences: ^2.2.0
   auto_route: ^7.7.0
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
