@@ -64,11 +64,14 @@ class _AddFlightPageState extends State<AddFlightPage> {
         child: CustomScrollView(slivers: <Widget>[
           UtilityUI.appBarCustom(
               context: context, title1: "New", title2: "Flight"),
-          UtilityUI.labelSection(label: "Number Flight"),
+          UtilityUI.labelSection(
+              label: "Number Flight", infoText: "insert iata of flight"),
           _divider(),
           _inputNumberFlight(),
           _divider(),
-          UtilityUI.labelSection(label: "Date Flight"),
+          UtilityUI.labelSection(
+              label: "Date Flight",
+              infoText: "enter the departure date \n of the flight"),
           _divider(),
           _inputDateFlight(),
           _divider(),
@@ -121,10 +124,10 @@ class _AddFlightPageState extends State<AddFlightPage> {
             ),
             child: Align(
               alignment: AlignmentDirectional.topStart,
-              child: Text(
-                '${date.month}-${date.day}-${date.year} ',
-                textAlign: TextAlign.start,
-              ),
+              child: Text('${date.month}-${date.day}-${date.year} ',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyMedium!.color)),
             ),
           )));
 

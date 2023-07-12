@@ -143,23 +143,22 @@ class _DetailsPageState extends State<DetailsPage> {
     required String label,
     required String value,
   }) {
-    return GridTile(
-      child: Container(
-        decoration: const BoxDecoration(
-            border: Border.symmetric(
-          vertical: BorderSide(width: 0.1),
-          horizontal: BorderSide(width: 0.1),
-        )),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(label),
-            Text(value,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
-          ],
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Theme.of(context).dividerTheme.color!,
+          width: 0.5,
         ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(label),
+          Text(value,
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+        ],
       ),
     );
   }

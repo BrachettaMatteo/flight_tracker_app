@@ -6,6 +6,7 @@ class ThemeCustom {
   final Color _primaryColor = Colors.blue.shade800;
   ThemeData get lightTheme => ThemeData(
       primaryColor: _primaryColor,
+      dividerTheme: const DividerThemeData(color: Colors.black38),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(_primaryColor),
@@ -30,6 +31,7 @@ class ThemeCustom {
 
   ThemeData get dark => ThemeData(
         primaryColor: Colors.blue.shade800,
+        dividerTheme: const DividerThemeData(color: Colors.white38),
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.grey.shade800,
         fontFamily: globalFont,
