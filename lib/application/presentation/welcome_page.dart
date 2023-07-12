@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flight_tracker/core/routes/app_router.dart';
@@ -51,22 +49,22 @@ class WelcomePage extends StatelessWidget {
               top: 30,
               right: 30,
               child: TextButton(
-                  onPressed: () {
-                    log("press skip");
-                    context.router.replace(const HomeRoute());
-                  },
+                  onPressed: () => context.router.replace(const HomeRoute()),
                   child: Text("Skip",
-                      style:
-                          TextStyle(color: Theme.of(context).primaryColor)))),
+                      style: Theme.of(context).textTheme.labelLarge))),
           Positioned(
               bottom: 20,
               child: Center(
                 child: SmoothPageIndicator(
-                  controller: _controller,
-                  count: screens.length,
-                  effect: JumpingDotEffect(
-                      activeDotColor: Theme.of(context).primaryColor),
-                ),
+                    controller: _controller,
+                    count: screens.length,
+                    effect: JumpingDotEffect(
+                        activeDotColor: Theme.of(context).primaryColor),
+                    onDotClicked: (index) => _controller.animateToPage(
+                          index,
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.easeInOut,
+                        )),
               ))
         ],
       ),
