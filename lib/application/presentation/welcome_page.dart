@@ -14,14 +14,14 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> screens = [
       _getPage(
-        urlImage: "asset/img/splash1.svg",
+        urlImage: "assets/img/splash1.svg",
         title: "Flight tracker",
         description: "Track your flights and check the updates",
         finalPage: false,
         context: context,
       ),
       _getPage(
-        urlImage: "asset/img/splash2.svg",
+        urlImage: "assets/img/splash2.svg",
         title: "Add flight",
         description:
             "insert iata code for flight and add the flight to homepage",
@@ -29,7 +29,7 @@ class WelcomePage extends StatelessWidget {
         context: context,
       ),
       _getPage(
-        urlImage: "asset/img/splash3.svg",
+        urlImage: "assets/img/splash3.svg",
         title: "Control",
         description: "keep track of your flights",
         finalPage: true,

@@ -45,8 +45,8 @@ void main() {
   setUp(() {
     WidgetsFlutterBinding.ensureInitialized();
     apiLocal = FlightTrackerApiLocal(
-        pathJsonResource: "asset/test.json",
-        pathJsonResourceUpdate: "asset/updateTest.json");
+        pathJsonResource: "assets/test.json",
+        pathJsonResourceUpdate: "assets/updateTest.json");
   });
 
   test('Test get flight by id', () async {
