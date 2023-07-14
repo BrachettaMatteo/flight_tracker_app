@@ -1,72 +1,73 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flight_tracker/core/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 @RoutePage()
-class WelcomePage extends StatefulWidget {
-  const WelcomePage({super.key});
-
-  @override
-  State<WelcomePage> createState() => _WelcomePageState();
-}
-
-class _WelcomePageState extends State<WelcomePage> {
-  late PageController _controller;
-  int currentPage = 0;
-  @override
-  void initState() {
-    _controller = PageController(initialPage: 0);
-    _controller.addListener(() {
-      setState(() {
-        currentPage = _controller.page!.toInt();
-      });
-    });
-    super.initState();
-  }
+class WelcomePage extends StatelessWidget {
+  final PageController _controller = PageController(initialPage: 0);
+  WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> screens = [
+      _getPage(
+        urlImage: "asset/img/splash1.svg",
+        title: "Flight tracker",
+        description: "Track your flights and check the updates",
+        finalPage: false,
+        context: context,
+      ),
+      _getPage(
+        urlImage: "asset/img/splash2.svg",
+        title: "Add flight",
+        description:
+            "insert iata code for flight and add the flight to homepage",
+        finalPage: false,
+        context: context,
+      ),
+      _getPage(
+        urlImage: "asset/img/splash3.svg",
+        title: "Control",
+        description: "keep track of your flights",
+        finalPage: true,
+        context: context,
+      ),
+    ];
     return Scaffold(
-        body: Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        PageView(
-          controller: _controller,
-          children: [
-            _getPage(
-                urlImage: "asset/img/splash1.svg",
-                title: "Flight tracker",
-                description: "Track your flights and check the updates"),
-            _getPage(
-                urlImage: "asset/img/splash2.svg",
-                title: "Simply app",
-                description:
-                    "insert iata code for flight and add the flight to homepage"),
-            _getPage(
-              urlImage: "asset/img/splash3.svg",
-              title: "Add flight",
-              description: "start tracking your flight",
-            ),
-          ],
-        ),
-        if (currentPage == 2) ...[
+        body: SafeArea(
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          PageView(
+            controller: _controller,
+            children: screens,
+          ),
           Positioned(
-            bottom: 150,
-            child: ElevatedButton(
-                style: ButtonStyle(
-                    elevation: const MaterialStatePropertyAll(20),
-                    backgroundColor:
-                        MaterialStatePropertyAll(Colors.green.shade700)),
-                onPressed: () => context.router.replace(const HomeRoute()),
-                child: const Text(
-                  "go to app",
-                  style: TextStyle(color: Colors.white),
-                )),
-          )
+              top: 30,
+              right: 30,
+              child: TextButton(
+                  onPressed: () => context.router.replace(const HomeRoute()),
+                  child: Text("Skip",
+                      style: Theme.of(context).textTheme.labelLarge))),
+          Positioned(
+              bottom: 20,
+              child: Center(
+                child: SmoothPageIndicator(
+                    controller: _controller,
+                    count: screens.length,
+                    effect: JumpingDotEffect(
+                        activeDotColor: Theme.of(context).primaryColor),
+                    onDotClicked: (index) => _controller.animateToPage(
+                          index,
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.easeInOut,
+                        )),
+              ))
         ],
-        Positioned(bottom: 20, left: 0, right: 0, child: _indicator())
-      ],
+      ),
     ));
   }
 
@@ -74,62 +75,54 @@ class _WelcomePageState extends State<WelcomePage> {
     required String urlImage,
     required String title,
     required String description,
+    required bool finalPage,
+    required BuildContext context,
   }) =>
-      Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SvgPicture.asset(
-            urlImage,
-            height: 300,
-          ),
-          Text(
-            title,
-            style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 5,
-                fontSize: 25),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-            child: Text(
-              description,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 16),
-            ),
-          ),
-        ],
-      ));
-
-  _indicator() => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _indicatorButton(indexPage: 0),
-          _indicatorButton(indexPage: 1),
-          _indicatorButton(indexPage: 2),
-        ],
+      SafeArea(
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(
+                  urlImage,
+                  height: 300,
+                ),
+                AutoSizeText(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 5,
+                      fontSize: 25),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: Text(
+                    description,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+              ],
+            )),
+            Visibility(
+                visible: finalPage,
+                child: Positioned(
+                  bottom: 100,
+                  child: ElevatedButton(
+                      onPressed: () =>
+                          context.router.replace(const HomeRoute()),
+                      child: const Text(
+                        "start to tracking flight",
+                        style: TextStyle(color: Colors.white),
+                      )),
+                )),
+          ],
+        ),
       );
-
-  _goPage({required int indexPage}) {
-    if (currentPage != indexPage) {
-      if (_controller.hasClients) {
-        _controller.animateToPage(indexPage,
-            duration: const Duration(milliseconds: 1), curve: Curves.linear);
-        currentPage = indexPage;
-        setState(() {});
-      }
-    }
-  }
-
-  _indicatorButton({required int indexPage}) => IconButton(
-      onPressed: () => _goPage(indexPage: indexPage),
-      icon: CircleAvatar(
-        radius: 8,
-        backgroundColor: currentPage == indexPage
-            ? Theme.of(context).primaryColor
-            : Colors.black45,
-      ));
 }

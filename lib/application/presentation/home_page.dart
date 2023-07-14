@@ -70,6 +70,7 @@ class HomePage extends StatelessWidget {
       return [
         UtilityUI.labelSection(
           label: labelText,
+          infoText: null,
         ),
         ElementListFlight(
           listFlight: list,
