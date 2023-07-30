@@ -16,7 +16,6 @@ cd flightTracker
 Flutter run ios
 ```
 ### Aspect
-![](.github/img/dark_welcome.png)
-![](.github/img/lightWelcome.png)
-![](.github/img/dark.png)
-![](.github/img/light.png)
+![](.github/img/slide1-WelcomeScreens.png)
+![](.github/img/slide2-Pages.png)
+![](.github/img/slide3-Details-flight.png)
