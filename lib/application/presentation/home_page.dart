@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SvgPicture.asset(
-                "asset/img/splash1.svg",
+                "assets/img/splash1.svg",
                 width: MediaQuery.of(context).size.width * 0.9,
               ),
               const Text("add flights to see tracking"),

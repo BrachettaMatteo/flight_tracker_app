@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../../../data/model/flight.dart';
 import '../../../data/model/storage_flight.dart';
@@ -30,6 +31,7 @@ class FlightTrackerBloc extends Bloc<FlightTrackerEvent, FlightTrackerState> {
       FlightTrackerEventInit event, Emitter<FlightTrackerState> emit) async {
     storageFlight = StorageFlight(db: db, api: repoApi);
     await storageFlight.init();
+    FlutterNativeSplash.remove();
     emit(FlightTrackerStateLoaded(
         future: storageFlight.getFutureFlight(),
         past: storageFlight.getPastFlight(),
