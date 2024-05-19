@@ -4,13 +4,25 @@ import '../../core/utility.dart';
 import '../my_db.dart';
 
 /// Represent the necessary information of airport.
+/// Version:1.1.0
 @immutable
 class AirportDetails {
+  ///Identifier airport
   final String iata;
+
+  ///name airport
   final String nameAirport;
+
+  ///name terminal of Airport
   final String terminal;
+
+  ///name gate of Airport
   final String gate;
+
+  ///estimate arrive flight of Airport
   final DateTime estimateArrival;
+
+  ///current delay of flight
   final int delay;
 
   const AirportDetails(
@@ -21,6 +33,7 @@ class AirportDetails {
       required this.estimateArrival,
       required this.delay});
 
+  /// Generate  AirportDetails form map content data like json
   factory AirportDetails.fromJson(
           {required Map<String, dynamic> json, required TypeAirport type}) =>
       AirportDetails(
@@ -33,6 +46,7 @@ class AirportDetails {
           ),
           delay: json[Utility.db!.fieldDelay + type.name]);
 
+  /// Generate map content data like json content information of AirportDetails
   Map<String, dynamic> toJson({required TypeAirport type}) => {
         Utility.db!.fieldIdAirport + type.name: iata,
         Utility.db!.fieldNameAirport + type.name: nameAirport,
@@ -43,6 +57,7 @@ class AirportDetails {
         Utility.db!.fieldDelay + type.name: delay
       };
 
+  ///Generates a new AirportDetails by modifying only the inserted elements other than null
   AirportDetails copyWith(String? iata, String? nameAirport, String? terminal,
           String? gate, DateTime? estimateArrival, int? delay) =>
       AirportDetails(
@@ -75,4 +90,13 @@ class AirportDetails {
 
   @override
   int get hashCode => iata.hashCode;
+
+  ///Generates a new AirportDetails empty
+  factory AirportDetails.empty() => AirportDetails(
+      iata: "",
+      nameAirport: "",
+      terminal: "",
+      gate: "",
+      estimateArrival: DateTime.now(),
+      delay: 0);
 }

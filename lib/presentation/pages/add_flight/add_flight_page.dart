@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flight_tracker/presentation/pages/home/cubit/home_page_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../application/business_logic/bloc/flight_tracker_bloc.dart';
-import '../../core/Utility_UI.dart';
+import '../../../core/Utility_UI.dart';
+
+/// Page represent Ui for add flight on homepage
+/// Version:1.1.0
 
 @RoutePage()
 class AddFlightPage extends StatefulWidget {
@@ -48,20 +51,7 @@ class _AddFlightPageState extends State<AddFlightPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocListener<FlightTrackerBloc, FlightTrackerState>(
-        listenWhen: (previous, current) =>
-            previous != current &&
-            current is FlightTrackerStateFlightAddedStatus,
-        listener: (context, state) {
-          if (state is FlightTrackerStateFlightAddedStatus) {
-            ScaffoldMessenger.of(context).showSnackBar(UtilityUI.snackBar(
-                status: state.status, message: state.message));
-            if (state.status == Status.done) {
-              context.router.pop();
-            }
-          }
-        },
-        child: CustomScrollView(slivers: <Widget>[
+        body: CustomScrollView(slivers: <Widget>[
           UtilityUI.appBarCustom(
               context: context, title1: "New", title2: "Flight"),
           UtilityUI.labelSection(
@@ -76,10 +66,8 @@ class _AddFlightPageState extends State<AddFlightPage> {
           _inputDateFlight(),
           _divider(),
         ]),
-      ),
-      floatingActionButton: _btnAddFLight(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
+        floatingActionButton: _btnAddFLight(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);
   }
 
   _inputNumberFlight() => SliverToBoxAdapter(
@@ -135,11 +123,14 @@ class _AddFlightPageState extends State<AddFlightPage> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: 50,
       child: ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
           if (_formFieldKey.currentState!.validate()) {
-            BlocProvider.of<FlightTrackerBloc>(context).add(
-                FlightTrackerEventAddFlight(
-                    idFlight: _editingController.text.trim().toUpperCase()));
+            await context
+                .read<HomePageCubit>()
+                .addFlight(gufi: _editingController.text)
+                .then((val) {
+              if (val) context.router.popForced();
+            });
           }
         },
         child: Text(

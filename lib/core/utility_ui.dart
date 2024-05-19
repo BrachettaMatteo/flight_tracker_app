@@ -1,12 +1,14 @@
+import 'package:flight_tracker/presentation/pages/home/cubit/home_page_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../application/business_logic/bloc/flight_tracker_bloc.dart';
-
 class UtilityUI {
-  static get iconCustom => Transform.rotate(
+  static iconCustom([Color? color]) => Transform.rotate(
         angle: 0.8,
-        child: const Icon(FontAwesomeIcons.planeUp),
+        child: Icon(
+          FontAwesomeIcons.planeUp,
+          color: color ?? Colors.white,
+        ),
       );
 
   static SliverAppBar appBarCustom(
@@ -22,7 +24,7 @@ class UtilityUI {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              UtilityUI.iconCustom,
+              UtilityUI.iconCustom(Theme.of(context).iconTheme.color),
               const SizedBox(width: 10),
               Text(title1,
                   style: TextStyle(

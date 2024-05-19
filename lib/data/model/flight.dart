@@ -1,19 +1,21 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/utility.dart';
 import '../my_db.dart';
 import 'airport_detail.dart';
 
-///Represent the flight.
-///The flight is compost:
-///
-///[id] to identify unique flight;
-///[airportDeparture] to container the information of airport departure;
-///[airportArrival] to container the information of airport arrival;
+/// Represent the flight.
+/// Version:1.1.0
 @immutable
-class Flight {
+class Flight extends Equatable {
+  ///information of airport departure;
   final AirportDetails airportDeparture;
+
+  ///information of airport arrival;
   final AirportDetails airportArrival;
+
+  /// identify flight
   final String id;
   final String note;
 
@@ -23,6 +25,7 @@ class Flight {
       required this.airportArrival,
       required this.note});
 
+  ///Generates a new Flight by modifying only the inserted elements other than null
   Flight copyWith({
     String? id,
     AirportDetails? airportDeparture,
@@ -43,6 +46,7 @@ class Flight {
           AirportDetails.fromJson(json: json, type: TypeAirport.arrival),
       note: json[Utility.db!.fieldNote] ?? "");
 
+  ///Convert object to map like json
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {Utility.db!.fieldId: id};
     json.addAll(airportDeparture.toJson(type: TypeAirport.departure));
@@ -59,14 +63,13 @@ class Flight {
         ..writeln("note: $note"))
       .toString();
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Flight &&
-          id == other.id &&
-          airportDeparture == other.airportDeparture &&
-          airportArrival == other.airportArrival;
+  ///Construct empty flight
+  factory Flight.empty() => Flight(
+      id: "",
+      airportDeparture: AirportDetails.empty(),
+      airportArrival: AirportDetails.empty(),
+      note: "");
 
   @override
-  int get hashCode => id.hashCode;
+  List<Object?> get props => [airportDeparture, airportArrival, id, note];
 }

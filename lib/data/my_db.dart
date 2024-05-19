@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:flight_tracker/core/logger.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../data/model/flight.dart';
@@ -55,7 +54,7 @@ class MyDB implements DatabaseRepository {
           ${fieldGateAirport + destinationType.name} TEXT NOT NULL,
           ${fieldTerminalAirport + destinationType.name} TEXT NOT NULL,
           ${fieldTimeEstimatedAirport + destinationType.name} INTEGER NOT NULL,
-           ${fieldDelay + destinationType.name} INTEGER NOT NULL,
+          ${fieldDelay + destinationType.name} INTEGER NOT NULL,
           ${fieldNameAirport + startType.name} TEXT NOT NULL,
           ${fieldIdAirport + startType.name} TEXT NOT NULL,
           ${fieldGateAirport + startType.name} TEXT NOT NULL,
@@ -65,7 +64,7 @@ class MyDB implements DatabaseRepository {
           $fieldNote TEXT
         )
         """);
-      log("create db");
+      logger.i("create database ${DateTime.now().toIso8601String()}");
     });
   }
 
@@ -90,15 +89,6 @@ class MyDB implements DatabaseRepository {
   Future<void> updateFlight(Flight flight) async {
     await db.update(nameTable, flight.toJson(),
         where: "$fieldId =?", whereArgs: [flight.id]);
-  }
-
-  @override
-  Future<void> updateNoteFlight(Flight flight, String note) async {
-    await db.rawUpdate('''
-    UPDATE $nameTable 
-    SET $fieldNote = ?
-    WHERE $fieldId = ?
-    ''', [flight.note, flight.id]);
   }
 }
 

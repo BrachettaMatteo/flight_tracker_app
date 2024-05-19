@@ -33,6 +33,7 @@ class FlightTrackerApiLocal extends FightTrackerApiRepository {
   String get fieldIdAirport => "iata";
   @override
   String get fieldDelay => "delay";
+
   @override
   Future<Flight?> getFlightById(String idFlight, [String? pathRef]) async {
     final String response =
@@ -42,7 +43,6 @@ class FlightTrackerApiLocal extends FightTrackerApiRepository {
     Map<String, dynamic>? el = listDirty
         .where((element) => element[locationId][fieldId] == idFlight)
         .firstOrNull;
-
     return el != null
         ? Flight(
             id: el[locationId][fieldId],

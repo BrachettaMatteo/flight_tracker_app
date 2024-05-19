@@ -15,24 +15,16 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    WelcomeRoute.name: (routeData) {
-      final args = routeData.argsAs<WelcomeRouteArgs>(
-          orElse: () => const WelcomeRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: WelcomePage(key: args.key),
-      );
-    },
     AddFlightRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const AddFlightPage(),
       );
     },
-    DetailsRoute.name: (routeData) {
+    DetailsFlightRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const DetailsPage(),
+        child: const DetailsFlightPage(),
       );
     },
     HomeRoute.name: (routeData) {
@@ -41,7 +33,57 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HomePage(),
       );
     },
+    WelcomeRoute.name: (routeData) {
+      final args = routeData.argsAs<WelcomeRouteArgs>(
+          orElse: () => const WelcomeRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WelcomePage(key: args.key),
+      );
+    },
   };
+}
+
+/// generated route for
+/// [AddFlightPage]
+class AddFlightRoute extends PageRouteInfo<void> {
+  const AddFlightRoute({List<PageRouteInfo>? children})
+      : super(
+          AddFlightRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddFlightRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DetailsFlightPage]
+class DetailsFlightRoute extends PageRouteInfo<void> {
+  const DetailsFlightRoute({List<PageRouteInfo>? children})
+      : super(
+          DetailsFlightRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DetailsFlightRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [HomePage]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
+      : super(
+          HomeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -71,46 +113,4 @@ class WelcomeRouteArgs {
   String toString() {
     return 'WelcomeRouteArgs{key: $key}';
   }
-}
-
-/// generated route for
-/// [AddFlightPage]
-class AddFlightRoute extends PageRouteInfo<void> {
-  const AddFlightRoute({List<PageRouteInfo>? children})
-      : super(
-          AddFlightRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'AddFlightRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [DetailsPage]
-class DetailsRoute extends PageRouteInfo<void> {
-  const DetailsRoute({List<PageRouteInfo>? children})
-      : super(
-          DetailsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'DetailsRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [HomePage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
-      : super(
-          HomeRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'HomeRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }

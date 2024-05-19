@@ -5,6 +5,7 @@ import '../../domain/repository/flight_tracker_api_repository.dart';
 
 /// Represent the repository for Storage flight.
 /// It content action for manage list fo blok
+/// Version:1.1.0
 class StorageFlight {
   final DatabaseRepository db;
   final FightTrackerApiRepository api;
@@ -12,6 +13,7 @@ class StorageFlight {
 
   StorageFlight({required this.db, required this.api});
 
+  /// Action to initialize storage flight and fetch data
   Future<void> init() async {
     await db.initDB();
     Utility.db = db;
@@ -21,10 +23,12 @@ class StorageFlight {
             await api.updateListFlight(listToUpdate: await db.getAllFlight()));
   }
 
+  /// Action to add flight in database
   void add({required Flight flight}) {
     _storage.add(flight);
   }
 
+  /// Action to remove flight in database
   Future<bool> remove({required Flight flight}) async {
     if (contains(flight: flight)) {
       _storage.remove(flight);
@@ -117,17 +121,6 @@ class StorageFlight {
 
   refresh() async => updateListFlight(
       newList: await api.updateListFlight(listToUpdate: _storage));
-
-  Future<bool> updateNote(Flight flight) async {
-    Flight? f = _storage.where((element) => element.id == flight.id).first;
-    if (f.note != flight.note) {
-      db.updateNoteFlight(flight, flight.note);
-      final index = _storage.indexWhere((element) => element.id == flight.id);
-      _storage[index] = flight;
-      return true;
-    }
-    return false;
-  }
 
   void replaceFlight({required Flight flight}) {
     if (containsByid(idFlight: flight.id)) {

@@ -9,26 +9,19 @@ import '../domain/repository/flight_tracker_api_repository.dart';
 class FlightTrackerApiAviationstack extends FightTrackerApiRepository {
   @override
   String get fieldGateAirport => "gate";
-
   @override
   String get fieldId => "iata";
   String get locationId => "flight";
-
   @override
   String get fieldMapAirportDetailArrival => "arrival";
-
   @override
   String get fieldMapAirportDetailDeparture => "departure";
-
   @override
   String get fieldNameAirport => "airport";
-
   @override
   String get fieldTerminalAirport => "terminal";
-
   @override
   String get fieldTimeEstimatedAirport => "estimated";
-
   @override
   String get fieldIdAirport => "iata";
   String personalAccessKey = "";

@@ -1,31 +1,38 @@
 import 'package:flight_tracker/Data/my_db.dart';
+import 'package:flight_tracker/core/global_bloc_observer.dart';
+import 'package:flight_tracker/domain/repository/database_repository.dart';
+import 'package:flight_tracker/presentation/pages/details_flight/cubit/details_flight_cubit.dart';
+import 'package:flight_tracker/presentation/pages/home/cubit/home_page_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'app.dart';
-import 'application/business_logic/bloc/flight_tracker_bloc.dart';
 import 'data/flight_tracker_api_local.dart';
 
+/// Version:1.1.0
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
+  // initialize observer for bloc
+  Bloc.observer = MyGlobalObserver();
   final pref = await SharedPreferences.getInstance();
   bool? shoWelcomePage;
+
   if (pref.getBool("first_login") ?? true) {
     pref.setBool("first_login", false);
     shoWelcomePage = true;
   }
+  final DatabaseRepository db = MyDB();
 
   runApp(MultiBlocProvider(providers: [
-    BlocProvider(
-        create: (_) => FlightTrackerBloc(
-              db: MyDB(),
+    BlocProvider<HomePageCubit>(
+        create: (_) => HomePageCubit(
+              db: db,
               repoApi: FlightTrackerApiLocal(
                   pathJsonResource: "assets/json/data.json",
                   pathJsonResourceUpdate: 'assets/json/update.json'),
-            )..add(FlightTrackerEventInit()))
+            )..init()),
+    BlocProvider<DetailsFlightCubit>(create: (_) => DetailsFlightCubit(db))
   ], child: MyApp(showWelcomePage: shoWelcomePage ?? false)));
 }

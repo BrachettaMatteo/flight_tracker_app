@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /// class Represent the theme of app
+/// Version:1.1.0
 class ThemeCustom {
   final Color _primaryColor = Colors.blue.shade800;
   ThemeData get lightTheme => ThemeData(
@@ -9,12 +10,12 @@ class ThemeCustom {
       dividerTheme: const DividerThemeData(color: Colors.black38),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(_primaryColor),
-              shape: MaterialStatePropertyAll(
+              backgroundColor: WidgetStatePropertyAll(_primaryColor),
+              shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
-              iconColor: const MaterialStatePropertyAll(Colors.white),
-              elevation: const MaterialStatePropertyAll(20))),
+              iconColor: const WidgetStatePropertyAll(Colors.white),
+              elevation: const WidgetStatePropertyAll(20))),
       brightness: Brightness.light,
       textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.black)),
       scaffoldBackgroundColor: Colors.white,
@@ -24,8 +25,9 @@ class ThemeCustom {
           backgroundColor: Colors.transparent,
           elevation: 0),
       useMaterial3: true,
+      canvasColor: _primaryColor,
       floatingActionButtonTheme:
-          const FloatingActionButtonThemeData(backgroundColor: Colors.white60));
+          FloatingActionButtonThemeData(backgroundColor: _primaryColor));
 
   String get globalFont => "RobotoMono";
 
@@ -38,16 +40,17 @@ class ThemeCustom {
         appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent, elevation: 0),
         useMaterial3: true,
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-            backgroundColor: Colors.grey.shade600),
+        floatingActionButtonTheme:
+            FloatingActionButtonThemeData(backgroundColor: _primaryColor),
+        canvasColor: _primaryColor,
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(_primaryColor),
-                shape: MaterialStatePropertyAll(
+                backgroundColor: WidgetStatePropertyAll(_primaryColor),
+                shape: WidgetStatePropertyAll(
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                 ),
-                iconColor: const MaterialStatePropertyAll(Colors.white),
-                elevation: const MaterialStatePropertyAll(20))),
+                iconColor: const WidgetStatePropertyAll(Colors.white),
+                elevation: const WidgetStatePropertyAll(20))),
       );
 }
