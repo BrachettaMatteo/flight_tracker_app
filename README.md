@@ -10,13 +10,21 @@ An app to check the status of flights. The default implementation use the json d
 - **Illustration**: [undraw](https://undraw.co)
 
 ## Run project
-
-(mac command)
-
+move in project
 ```bash
-git clone https://github.com/BrachettaMatteo/flightTracker.git
 cd flightTracker
-dart run build_runner build
+```
+### Generated file
+commands for generating files:
+```bash
+dart run build_runner build --delete-conflicting-outputs
+```
+commands to generate translations:
+```bash
+flutter gen-l10n
+```
+run
+```bash
 flutter run ios
 ```
 
