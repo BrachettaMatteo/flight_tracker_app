@@ -12,7 +12,7 @@ class HomePageState extends Equatable {
   final List<Flight> flightsFuture;
 
   /// Status of cubit
-  final Status status;
+  final HomePageStatus status;
 
   final String message;
 
@@ -27,7 +27,7 @@ class HomePageState extends Equatable {
           {List<Flight>? flightsToday,
           List<Flight>? flightsPassed,
           List<Flight>? flightsFuture,
-          Status? status,
+          HomePageStatus? status,
           String? message}) =>
       HomePageState(
           flightsToday: flightsToday ?? this.flightsToday,
@@ -46,8 +46,6 @@ class HomePageInitial extends HomePageState {
       {super.flightsToday = const [],
       super.flightsPassed = const [],
       super.flightsFuture = const [],
-      super.status = Status.initial,
+      super.status = HomePageStatus.initial,
       super.message = ""});
 }
-
-enum Status { initial, work, error, done }

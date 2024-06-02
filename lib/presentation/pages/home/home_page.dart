@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flight_tracker/core/routes/app_router.dart';
-import 'package:flight_tracker/presentation/pages/home/cubit/home_page_cubit.dart';
+import 'package:flight_tracker/presentation/pages/home/logic/home_page_cubit.dart';
 import 'package:flight_tracker/presentation/pages/home/widget/flight_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../core/utility_ui.dart';
+import '../../../core/ui_kit/ui_kit.dart';
 import '../../../data/model/flight.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -23,20 +23,21 @@ class HomePage extends StatelessWidget {
               previous.message != current.message,
           listener: (context, state) async {
             if (state.message != "") {
-              ScaffoldMessenger.of(context).showSnackBar(UtilityUI.snackBar(
-                  status: state.status, message: state.message));
+              ScaffoldMessenger.of(context).showSnackBar(UIKit.snackBar(
+                  isCorrect: state.status == HomePageStatus.done,
+                  message: state.message));
             }
           },
           buildWhen: (previous, current) => previous != current,
           builder: (context, state) {
-            if (state.status == Status.initial) {
+            if (state.status == HomePageStatus.initial) {
               return const Center(child: CircularProgressIndicator());
             }
             if (state.flightsFuture.isEmpty &&
                 state.flightsPassed.isEmpty &&
                 state.flightsToday.isEmpty) {
               return CustomScrollView(slivers: <Widget>[
-                UtilityUI.appBarCustom(
+                UIKit.appBar(
                     context: context, title1: "Flight", title2: "Tracker"),
                 _emptyFlights(context)
               ]);
@@ -49,7 +50,7 @@ class HomePage extends StatelessWidget {
                 return Future<void>.delayed(const Duration(seconds: 1));
               },
               child: CustomScrollView(slivers: <Widget>[
-                UtilityUI.appBarCustom(
+                UIKit.appBar(
                     context: context, title1: "Flight", title2: "Tracker"),
                 ..._getElementSection(
                     labelText:
@@ -76,7 +77,7 @@ class HomePage extends StatelessWidget {
   FloatingActionButton _floatingButton(BuildContext context) =>
       FloatingActionButton(
         onPressed: () => context.router.push(const AddFlightRoute()),
-        child: UtilityUI.iconCustom(),
+        child: UIKit.icon(),
       );
 
   List<Widget> _getElementSection(
@@ -85,7 +86,7 @@ class HomePage extends StatelessWidget {
       double? opacity}) {
     if (list.isNotEmpty) {
       return [
-        UtilityUI.labelSection(
+        UIKit.labelSection(
           label: labelText,
           infoText: null,
         ),

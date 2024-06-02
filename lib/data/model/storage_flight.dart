@@ -1,4 +1,4 @@
-import '../../core/utility.dart';
+import '../../domain/utility_access_storage.dart';
 import '../../data/model/flight.dart';
 import '../../domain/repository/database_repository.dart';
 import '../../domain/repository/flight_tracker_api_repository.dart';
@@ -16,8 +16,8 @@ class StorageFlight {
   /// Action to initialize storage flight and fetch data
   Future<void> init() async {
     await db.initDB();
-    Utility.db = db;
-    Utility.apiFlightTracker = api;
+    UtilityAccessStorage.db = db;
+    UtilityAccessStorage.apiFlightTracker = api;
     updateListFlight(
         newList:
             await api.updateListFlight(listToUpdate: await db.getAllFlight()));

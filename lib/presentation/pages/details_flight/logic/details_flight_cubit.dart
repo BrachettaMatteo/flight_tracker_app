@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flight_tracker/data/model/flight.dart';
 import 'package:flight_tracker/domain/repository/database_repository.dart';
-import 'package:flight_tracker/presentation/pages/home/cubit/home_page_cubit.dart';
+import 'package:flight_tracker/presentation/pages/home/logic/home_page_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

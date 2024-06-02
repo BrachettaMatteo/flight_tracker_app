@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flight_tracker/presentation/pages/details_flight/cubit/details_flight_cubit.dart';
+import 'package:flight_tracker/presentation/pages/details_flight/logic/details_flight_cubit.dart';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

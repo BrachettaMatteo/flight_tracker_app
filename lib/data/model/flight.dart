@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/utility.dart';
+import '../../domain/utility_access_storage.dart';
 import '../my_db.dart';
 import 'airport_detail.dart';
 
@@ -39,19 +39,19 @@ class Flight extends Equatable {
           note: note ?? this.note);
 
   factory Flight.fromJson(Map<String, dynamic> json) => Flight(
-      id: json[Utility.db!.fieldId],
+      id: json[UtilityAccessStorage.db!.fieldId],
       airportDeparture:
           AirportDetails.fromJson(json: json, type: TypeAirport.departure),
       airportArrival:
           AirportDetails.fromJson(json: json, type: TypeAirport.arrival),
-      note: json[Utility.db!.fieldNote] ?? "");
+      note: json[UtilityAccessStorage.db!.fieldNote] ?? "");
 
   ///Convert object to map like json
   Map<String, dynamic> toJson() {
-    Map<String, dynamic> json = {Utility.db!.fieldId: id};
+    Map<String, dynamic> json = {UtilityAccessStorage.db!.fieldId: id};
     json.addAll(airportDeparture.toJson(type: TypeAirport.departure));
     json.addAll(airportArrival.toJson(type: TypeAirport.arrival));
-    json.addAll({Utility.db!.fieldNote: note});
+    json.addAll({UtilityAccessStorage.db!.fieldNote: note});
     return json;
   }
 

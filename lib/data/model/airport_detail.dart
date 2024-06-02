@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/utility.dart';
+import '../../domain/utility_access_storage.dart';
 import '../my_db.dart';
 
 /// Represent the necessary information of airport.
@@ -37,24 +37,27 @@ class AirportDetails {
   factory AirportDetails.fromJson(
           {required Map<String, dynamic> json, required TypeAirport type}) =>
       AirportDetails(
-          iata: json[Utility.db!.fieldIdAirport + type.name],
-          nameAirport: json[Utility.db!.fieldNameAirport + type.name],
-          terminal: json[Utility.db!.fieldTerminalAirport + type.name],
-          gate: json[Utility.db!.fieldGateAirport + type.name],
+          iata: json[UtilityAccessStorage.db!.fieldIdAirport + type.name],
+          nameAirport:
+              json[UtilityAccessStorage.db!.fieldNameAirport + type.name],
+          terminal:
+              json[UtilityAccessStorage.db!.fieldTerminalAirport + type.name],
+          gate: json[UtilityAccessStorage.db!.fieldGateAirport + type.name],
           estimateArrival: DateTime.fromMillisecondsSinceEpoch(
-            json[Utility.db!.fieldTimeEstimatedAirport + type.name],
+            json[
+                UtilityAccessStorage.db!.fieldTimeEstimatedAirport + type.name],
           ),
-          delay: json[Utility.db!.fieldDelay + type.name]);
+          delay: json[UtilityAccessStorage.db!.fieldDelay + type.name]);
 
   /// Generate map content data like json content information of AirportDetails
   Map<String, dynamic> toJson({required TypeAirport type}) => {
-        Utility.db!.fieldIdAirport + type.name: iata,
-        Utility.db!.fieldNameAirport + type.name: nameAirport,
-        Utility.db!.fieldTerminalAirport + type.name: terminal,
-        Utility.db!.fieldGateAirport + type.name: gate,
-        Utility.db!.fieldTimeEstimatedAirport + type.name:
+        UtilityAccessStorage.db!.fieldIdAirport + type.name: iata,
+        UtilityAccessStorage.db!.fieldNameAirport + type.name: nameAirport,
+        UtilityAccessStorage.db!.fieldTerminalAirport + type.name: terminal,
+        UtilityAccessStorage.db!.fieldGateAirport + type.name: gate,
+        UtilityAccessStorage.db!.fieldTimeEstimatedAirport + type.name:
             estimateArrival.millisecondsSinceEpoch,
-        Utility.db!.fieldDelay + type.name: delay
+        UtilityAccessStorage.db!.fieldDelay + type.name: delay
       };
 
   ///Generates a new AirportDetails by modifying only the inserted elements other than null

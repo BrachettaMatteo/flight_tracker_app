@@ -4,8 +4,10 @@ import 'package:flight_tracker/data/model/flight.dart';
 import 'package:flight_tracker/data/model/storage_flight.dart';
 import 'package:flight_tracker/domain/repository/database_repository.dart';
 import 'package:flight_tracker/domain/repository/flight_tracker_api_repository.dart';
+import 'package:flight_tracker/presentation/pages/home/logic/status/status_homePage.dart';
 import 'package:flutter/cupertino.dart';
 
+export 'package:flight_tracker/presentation/pages/home/logic/status/status_homePage.dart';
 part 'home_page_state.dart';
 
 class HomePageCubit extends Cubit<HomePageState> {
@@ -27,7 +29,7 @@ class HomePageCubit extends Cubit<HomePageState> {
         flightsToday: storageFlight.getTodayFlight(),
         flightsPassed: storageFlight.getPastFlight(),
         flightsFuture: storageFlight.getFutureFlight(),
-        status: Status.work));
+        status: HomePageStatus.work));
   }
 
   /// Add flight on personal list with
@@ -38,18 +40,18 @@ class HomePageCubit extends Cubit<HomePageState> {
       String? messageFailureAdded}) async {
     if (await storageFlight.addById(idFlight: gufi)) {
       emit(state.copyWith(
-          message: messageAdded ?? "flight add", status: Status.done));
+          message: messageAdded ?? "flight add", status: HomePageStatus.done));
     } else {
       emit(state.copyWith(
           message: messageFailureAdded ?? "error add fight",
-          status: Status.error));
+          status: HomePageStatus.error));
       return false;
     }
     emit(HomePageState(
         flightsToday: storageFlight.getTodayFlight(),
         flightsPassed: storageFlight.getPastFlight(),
         flightsFuture: storageFlight.getFutureFlight(),
-        status: Status.work));
+        status: HomePageStatus.work));
     return true;
   }
 
@@ -60,17 +62,18 @@ class HomePageCubit extends Cubit<HomePageState> {
       String? messageFailureDelate}) async {
     if (await storageFlight.remove(flight: flight)) {
       emit(state.copyWith(
-          message: messageDelete ?? "flight remove", status: Status.done));
+          message: messageDelete ?? "flight remove",
+          status: HomePageStatus.done));
     } else {
       emit(state.copyWith(
           message: messageFailureDelate ?? "error remove fight",
-          status: Status.error));
+          status: HomePageStatus.error));
     }
     emit(HomePageState(
         flightsToday: storageFlight.getTodayFlight(),
         flightsPassed: storageFlight.getPastFlight(),
         flightsFuture: storageFlight.getFutureFlight(),
-        status: Status.work));
+        status: HomePageStatus.work));
   }
 
   /// Refresh data flight
@@ -86,7 +89,7 @@ class HomePageCubit extends Cubit<HomePageState> {
         flightsToday: _getListToday(update),
         flightsPassed: _getListPass(update),
         flightsFuture: _getListFuture(update),
-        status: Status.work));
+        status: HomePageStatus.work));
   }
 
   ///Update in local flight
@@ -116,7 +119,8 @@ class HomePageCubit extends Cubit<HomePageState> {
       return emit(state.copyWith(flightsPassed: list));
     }
     emit(state.copyWith(
-        status: Status.error, message: messageError ?? "error update flight"));
+        status: HomePageStatus.error,
+        message: messageError ?? "error update flight"));
   }
 
   List<Flight> _getListToday(List<Flight> update) {
