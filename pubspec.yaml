@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
 
   
-  intl: ^0.19.0
+  intl: any
   #manage state
   flutter_bloc: ^8.1.3
   bloc: ^8.1.2
@@ -36,6 +36,8 @@ dependencies:
   flutter_native_splash: ^2.3.1
   #help print log 
   logger: ^2.0.1
+  flutter_localizations:
+    sdk: flutter
 dev_dependencies:
   flutter_test:
     sdk: flutter 
@@ -45,6 +47,7 @@ dev_dependencies:
   
 
 flutter:
+  generate: true
   uses-material-design: true
 
   assets:

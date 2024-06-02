@@ -24,11 +24,13 @@ class DetailsFlightCubit extends Cubit<DetailsFlightState> {
       emit(state.copyWith(noteWriting: note));
 
   ///Action for save note
-  Future<void> saveNote({required BuildContext context}) async {
+  Future<void> saveNote(
+      {required BuildContext context, required String messageError}) async {
     Flight flight = state.flight.copyWith(note: state.noteWriting);
     await db.updateFlight(flight).then((_) => {
           context.read<HomePageCubit>().updateFlight(
-              flight: state.flight.copyWith(note: state.noteWriting))
+              flight: state.flight.copyWith(note: state.noteWriting),
+              messageError: messageError)
         });
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/Utility_UI.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Page represent Ui for add flight on homepage
 /// Version:1.1.0
@@ -53,15 +54,22 @@ class _AddFlightPageState extends State<AddFlightPage> {
     return Scaffold(
         body: CustomScrollView(slivers: <Widget>[
           UtilityUI.appBarCustom(
-              context: context, title1: "New", title2: "Flight"),
+              context: context,
+              title1: AppLocalizations.of(context)!.label_new,
+              title2: AppLocalizations.of(context)!.label_flight),
           UtilityUI.labelSection(
-              label: "Number Flight", infoText: "insert iata of flight"),
+              label: AppLocalizations.of(context)!
+                  .label_numberFlight_addFlightPage,
+              infoText: AppLocalizations.of(context)!
+                  .help_numberFlight_addFlightPage),
           _divider(),
           _inputNumberFlight(),
           _divider(),
           UtilityUI.labelSection(
-              label: "Date Flight",
-              infoText: "enter the departure date \n of the flight"),
+              label:
+                  AppLocalizations.of(context)!.label_dateFlight_addFlightPage,
+              infoText:
+                  AppLocalizations.of(context)!.help_dateFlight_addFlightPage),
           _divider(),
           _inputDateFlight(),
           _divider(),
@@ -79,10 +87,12 @@ class _AddFlightPageState extends State<AddFlightPage> {
             controller: _editingController,
             validator: (value) {
               if ((value ?? "").isEmpty) {
-                return 'Please enter some text';
+                return AppLocalizations.of(context)!
+                    .message_errorEmptyNumberFlight_addFlightPage;
               }
               if ((value ?? "").length < 5) {
-                return "insert IATA of flight";
+                return AppLocalizations.of(context)!
+                    .message_errorIncorrectNumberFlight_addFlightPage;
               }
               return null;
             },
@@ -103,7 +113,7 @@ class _AddFlightPageState extends State<AddFlightPage> {
               CupertinoDatePicker(
                 initialDateTime: date,
                 mode: CupertinoDatePickerMode.date,
-                showDayOfWeek: true,
+                showDayOfWeek: false,
                 // This is called when the user changes the dateTime.
                 onDateTimeChanged: (DateTime newDateTime) {
                   setState(() => date = newDateTime);
@@ -127,14 +137,21 @@ class _AddFlightPageState extends State<AddFlightPage> {
           if (_formFieldKey.currentState!.validate()) {
             await context
                 .read<HomePageCubit>()
-                .addFlight(gufi: _editingController.text)
+                .addFlight(
+                    gufi: _editingController.text,
+                    messageAdded: AppLocalizations.of(context)!
+                        .message_confirm_addedFlight,
+                    messageFailureAdded:
+                        AppLocalizations.of(context)!.message_error_addedFlight)
                 .then((val) {
               if (val) context.router.popForced();
             });
           }
         },
         child: Text(
-          "add flight".toUpperCase(),
+          AppLocalizations.of(context)!
+              .btn_addFlight_addFlightPage
+              .toUpperCase(),
           style: const TextStyle(color: Colors.white),
         ),
       ));

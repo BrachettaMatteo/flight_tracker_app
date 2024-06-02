@@ -7,6 +7,7 @@ import 'package:flight_tracker/presentation/pages/home/cubit/home_page_cubit.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FlightList extends StatelessWidget {
   final List<Flight> list;
@@ -34,8 +35,12 @@ class FlightList extends StatelessWidget {
     return Dismissible(
       key: Key(flight.id),
       background: Container(color: Colors.red),
-      onDismissed: (_) =>
-          context.read<HomePageCubit>().removeFlight(flight: flight),
+      onDismissed: (_) => context.read<HomePageCubit>().removeFlight(
+          flight: flight,
+          messageDelete:
+              AppLocalizations.of(context)!.message_confirm_removeFlight,
+          messageFailureDelate:
+              AppLocalizations.of(context)!.message_error_removeFlight),
       child: InkWell(
         onTap: () => _openDetails(flight: flight, context: context),
         child: ListTile(

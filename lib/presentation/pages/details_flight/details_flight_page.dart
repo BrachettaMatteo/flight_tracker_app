@@ -11,6 +11,7 @@ import '../../../../data/model/flight.dart';
 import '../../../../core/Utility_UI.dart';
 import 'clipper/custom_footer_clipper.dart';
 import 'clipper/custom_header_clipper.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Page represent Ui for details flight
 /// Version:1.1.0
@@ -111,22 +112,26 @@ class DetailsFlightPage extends StatelessWidget {
           {required Flight flight, required BuildContext context}) =>
       SliverGrid.count(crossAxisCount: 2, childAspectRatio: 2, children: [
         _infoElement(
-            label: "Departure",
+            label:
+                AppLocalizations.of(context)!.label_departure_detailsFlightPage,
             value: DateFormat('HH:mm')
                 .format(flight.airportDeparture.estimateArrival),
             context: context),
         _infoElement(
-            label: "Gate / Terminal",
+            label: AppLocalizations.of(context)!
+                .label_gateTerminal_detailsFlightPage,
             value:
                 "${flight.airportDeparture.gate} - ${flight.airportDeparture.terminal}",
             context: context),
         _infoElement(
-            label: "Arrival",
+            label:
+                AppLocalizations.of(context)!.label_arrival_detailsFlightPage,
             value: DateFormat('HH:mm')
                 .format(flight.airportArrival.estimateArrival),
             context: context),
         _infoElement(
-            label: "Gate / Terminal",
+            label: AppLocalizations.of(context)!
+                .label_gateTerminal_detailsFlightPage,
             value:
                 "${flight.airportArrival.gate} - ${flight.airportArrival.terminal}",
             context: context),
@@ -185,7 +190,7 @@ class DetailsFlightPage extends StatelessWidget {
             child: Column(children: [
               Container(
                   margin: const EdgeInsets.only(top: 150 * 0.15),
-                  child: const Text("note")),
+                  child: Text(AppLocalizations.of(context)!.label_note)),
               BlocBuilder<DetailsFlightCubit, DetailsFlightState>(
                 builder: (context, state) {
                   return TextFormField(
@@ -196,9 +201,10 @@ class DetailsFlightPage extends StatelessWidget {
                         .changeNote(note: value),
                     textInputAction: TextInputAction.done,
                     onFieldSubmitted: (value) async {
-                      await context
-                          .read<DetailsFlightCubit>()
-                          .saveNote(context: context);
+                      await context.read<DetailsFlightCubit>().saveNote(
+                          context: context,
+                          messageError: AppLocalizations.of(context)!
+                              .message_error_updateFlight);
                       FocusManager.instance.primaryFocus?.unfocus();
                     },
                     textAlign: TextAlign.center,

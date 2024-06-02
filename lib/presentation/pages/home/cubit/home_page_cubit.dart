@@ -32,11 +32,17 @@ class HomePageCubit extends Cubit<HomePageState> {
 
   /// Add flight on personal list with
   /// [gufi]  Globally Unique Flight Identifier
-  Future<bool> addFlight({required String gufi}) async {
+  Future<bool> addFlight(
+      {required String gufi,
+      String? messageAdded,
+      String? messageFailureAdded}) async {
     if (await storageFlight.addById(idFlight: gufi)) {
-      emit(state.copyWith(message: "flight add", status: Status.done));
+      emit(state.copyWith(
+          message: messageAdded ?? "flight add", status: Status.done));
     } else {
-      emit(state.copyWith(message: "error add fight", status: Status.error));
+      emit(state.copyWith(
+          message: messageFailureAdded ?? "error add fight",
+          status: Status.error));
       return false;
     }
     emit(HomePageState(
@@ -48,11 +54,17 @@ class HomePageCubit extends Cubit<HomePageState> {
   }
 
   /// Remove flight by identifier [idFlight]
-  Future<void> removeFlight({required Flight flight}) async {
+  Future<void> removeFlight(
+      {required Flight flight,
+      String? messageDelete,
+      String? messageFailureDelate}) async {
     if (await storageFlight.remove(flight: flight)) {
-      emit(state.copyWith(message: "flight remove", status: Status.done));
+      emit(state.copyWith(
+          message: messageDelete ?? "flight remove", status: Status.done));
     } else {
-      emit(state.copyWith(message: "error remove fight", status: Status.error));
+      emit(state.copyWith(
+          message: messageFailureDelate ?? "error remove fight",
+          status: Status.error));
     }
     emit(HomePageState(
         flightsToday: storageFlight.getTodayFlight(),
@@ -78,7 +90,7 @@ class HomePageCubit extends Cubit<HomePageState> {
   }
 
   ///Update in local flight
-  void updateFlight({required Flight flight}) {
+  void updateFlight({required Flight flight, String? messageError}) {
     //check list content already update flight
     if (state.flightsFuture.contains(flight) ||
         state.flightsPassed.contains(flight) ||
@@ -104,7 +116,7 @@ class HomePageCubit extends Cubit<HomePageState> {
       return emit(state.copyWith(flightsPassed: list));
     }
     emit(state.copyWith(
-        status: Status.error, message: "Something wrong update flight"));
+        status: Status.error, message: messageError ?? "error update flight"));
   }
 
   List<Flight> _getListToday(List<Flight> update) {

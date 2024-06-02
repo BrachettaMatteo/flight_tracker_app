@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../core/utility_ui.dart';
 import '../../../data/model/flight.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -51,11 +52,18 @@ class HomePage extends StatelessWidget {
                 UtilityUI.appBarCustom(
                     context: context, title1: "Flight", title2: "Tracker"),
                 ..._getElementSection(
-                    labelText: "Today", list: state.flightsToday),
+                    labelText:
+                        AppLocalizations.of(context)!.section_today_homePage,
+                    list: state.flightsToday),
                 ..._getElementSection(
-                    labelText: "Coming soon", list: state.flightsFuture),
+                    labelText: AppLocalizations.of(context)!
+                        .section_comingSoon_homePage,
+                    list: state.flightsFuture),
                 ..._getElementSection(
-                    labelText: "Past", list: state.flightsPassed, opacity: 0.5)
+                    labelText:
+                        AppLocalizations.of(context)!.section_past_homePage,
+                    list: state.flightsPassed,
+                    opacity: 0.5)
               ]),
             );
           },
@@ -97,7 +105,7 @@ class HomePage extends StatelessWidget {
                 "assets/img/splash1.svg",
                 width: MediaQuery.of(context).size.width * 0.9,
               ),
-              const Text("add flights to see tracking"),
+              Text(AppLocalizations.of(context)!.message_empty_homepage),
             ],
           ),
         ),

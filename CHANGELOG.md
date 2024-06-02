@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Release
 
+### [1.2.0-beta1]() - ????-??-??
+
+### Added
+
+- Internalization app
+- add italian language support
+
 ### [1.1.0-beta1]() - 2024-05-19
 
 #### Added

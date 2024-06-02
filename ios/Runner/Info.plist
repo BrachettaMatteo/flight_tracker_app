@@ -29,6 +29,7 @@
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>en</string>
+		<string>it</string>
 	</array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
@@ -53,6 +54,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	
 </dict>
 </plist>

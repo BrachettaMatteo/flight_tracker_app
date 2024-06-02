@@ -4,6 +4,7 @@ import 'package:flight_tracker/core/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class WelcomePage extends StatelessWidget {
@@ -16,22 +17,21 @@ class WelcomePage extends StatelessWidget {
       _getPage(
         urlImage: "assets/img/splash1.svg",
         title: "Flight tracker",
-        description: "Track your flights and check the updates",
+        description: AppLocalizations.of(context)!.message_one_welcome,
         finalPage: false,
         context: context,
       ),
       _getPage(
         urlImage: "assets/img/splash2.svg",
-        title: "Add flight",
-        description:
-            "insert iata code for flight and add the flight to homepage",
+        title: AppLocalizations.of(context)!.title_two_welcome,
+        description: AppLocalizations.of(context)!.message_two_welcome,
         finalPage: false,
         context: context,
       ),
       _getPage(
         urlImage: "assets/img/splash3.svg",
-        title: "Control",
-        description: "keep track of your flights",
+        title: AppLocalizations.of(context)!.title_three_welcome,
+        description: AppLocalizations.of(context)!.message_three_welcome,
         finalPage: true,
         context: context,
       ),
@@ -50,7 +50,8 @@ class WelcomePage extends StatelessWidget {
               right: 30,
               child: TextButton(
                   onPressed: () => context.router.replace(const HomeRoute()),
-                  child: Text("Skip",
+                  child: Text(
+                      AppLocalizations.of(context)!.label_skip.toUpperCase(),
                       style: Theme.of(context).textTheme.labelLarge))),
           Positioned(
               bottom: 20,
@@ -117,9 +118,9 @@ class WelcomePage extends StatelessWidget {
                   child: ElevatedButton(
                       onPressed: () =>
                           context.router.replace(const HomeRoute()),
-                      child: const Text(
-                        "start to tracking flight",
-                        style: TextStyle(color: Colors.white),
+                      child: Text(
+                        AppLocalizations.of(context)!.btn_end_welcome,
+                        style: const TextStyle(color: Colors.white),
                       )),
                 )),
           ],
