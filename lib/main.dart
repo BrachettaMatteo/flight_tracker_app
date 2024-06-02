@@ -1,5 +1,5 @@
 import 'package:flight_tracker/Data/my_db.dart';
-import 'package:flight_tracker/core/global_bloc_observer.dart';
+import 'package:flight_tracker/core/observer/global_bloc_observer.dart';
 import 'package:flight_tracker/domain/repository/database_repository.dart';
 import 'package:flight_tracker/presentation/pages/details_flight/cubit/details_flight_cubit.dart';
 import 'package:flight_tracker/presentation/pages/home/cubit/home_page_cubit.dart';

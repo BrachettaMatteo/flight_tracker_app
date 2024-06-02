@@ -1,3 +1,4 @@
+import 'package:flight_tracker/core/observer/global_route_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'core/routes/app_router.dart';
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
     return MaterialApp.router(
-      routerConfig: _appRouter.config(),
+      routerConfig:
+          _appRouter.config(navigatorObservers: () => [GlobalRouteObserver()]),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       title: 'Flight Tracker',

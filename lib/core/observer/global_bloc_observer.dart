@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'logger.dart';
+import '../logger.dart';
 
 /// It used to communicate to the developer the behavior of the blocs in the execution of the application.
 ///
