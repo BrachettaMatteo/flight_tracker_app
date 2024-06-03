@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flight_tracker/core/ui_kit/ui_kit.dart';
 import 'package:flight_tracker/presentation/pages/details_flight/logic/details_flight_cubit.dart';
 
 import 'package:flutter/gestures.dart';
@@ -8,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../data/model/flight.dart';
-import '../../../../core/Utility_UI.dart';
 import 'clipper/custom_footer_clipper.dart';
 import 'clipper/custom_header_clipper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -65,7 +65,7 @@ class DetailsFlightPage extends StatelessWidget {
                                 alingText: CrossAxisAlignment.start,
                                 context: context)),
                       ),
-                      UtilityUI.iconCustom(),
+                      UIKit.icon(),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
                         child: Align(

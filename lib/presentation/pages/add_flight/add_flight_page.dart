@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flight_tracker/core/ui_kit/ui_kit.dart';
 import 'package:flight_tracker/presentation/pages/home/logic/home_page_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/Utility_UI.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Page represent Ui for add flight on homepage
@@ -53,11 +53,11 @@ class _AddFlightPageState extends State<AddFlightPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: CustomScrollView(slivers: <Widget>[
-          UtilityUI.appBarCustom(
+          UIKit.appBar(
               context: context,
               title1: AppLocalizations.of(context)!.label_new,
               title2: AppLocalizations.of(context)!.label_flight),
-          UtilityUI.labelSection(
+          UIKit.labelSection(
               label: AppLocalizations.of(context)!
                   .label_numberFlight_addFlightPage,
               infoText: AppLocalizations.of(context)!
@@ -65,7 +65,7 @@ class _AddFlightPageState extends State<AddFlightPage> {
           _divider(),
           _inputNumberFlight(),
           _divider(),
-          UtilityUI.labelSection(
+          UIKit.labelSection(
               label:
                   AppLocalizations.of(context)!.label_dateFlight_addFlightPage,
               infoText:
