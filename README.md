@@ -1,4 +1,8 @@
-# ![Flight_tracker](.github/img/logo.svg) Flight tracker
+# ![icon Flight_tracker](.github/img/logo.svg) Flight tracker
+![version progect Badge](https://img.shields.io/badge/version-1.1.0_beta-orange?style=flat)
+![version flutter Badge](https://img.shields.io/badge/Flutter-%203.22.1%20stable%20-blue?style=flat)
+![version dart Badge](https://img.shields.io/badge/Dart-%203.4.1%20-blue?style=flat)
+
 
 An app to check the status of flights. The default implementation use the json data in local. The data is storage in `asset/data.json`. If run project in Windows or web change the local storage because this implementation use `sqflite`.
 
