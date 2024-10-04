@@ -1,19 +1,21 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flight_tracker/core/routes/app_router.dart';
 import 'package:flight_tracker/presentation/pages/home/logic/home_page_cubit.dart';
+import 'package:flight_tracker/presentation/pages/home/pages/notification_page/logic/bloc/notification_bloc.dart';
 import 'package:flight_tracker/presentation/pages/home/widget/flight_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../core/ui_kit/ui_kit.dart';
-import '../../../data/model/flight.dart';
+import '../../../../core/ui_kit/ui_kit.dart';
+import '../../../../data/model/flight.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +53,23 @@ class HomePage extends StatelessWidget {
               },
               child: CustomScrollView(slivers: <Widget>[
                 UIKit.appBar(
-                    context: context, title1: "Flight", title2: "Tracker"),
+                    context: context,
+                    title1: "Flight",
+                    title2: "Tracker",
+                    actions: [
+                      BlocBuilder<NotificationBloc, NotificationState>(
+                        buildWhen: (previous, current) =>
+                            previous.notificationToSee !=
+                            current.notificationToSee,
+                        builder: (context, state) => IconButton(
+                            onPressed: () =>
+                                context.router.push(const NotificationRoute()),
+                            icon: Badge(
+                                label: Text(state.notificationToSee.toString()),
+                                isLabelVisible: state.notificationToSee > 0,
+                                child: const Icon(Icons.notifications))),
+                      )
+                    ]),
                 ..._getElementSection(
                     labelText:
                         AppLocalizations.of(context)!.section_today_homePage,

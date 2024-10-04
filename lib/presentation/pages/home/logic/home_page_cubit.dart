@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flight_tracker/core/notification_service.dart';
 import 'package:flight_tracker/data/model/flight.dart';
 import 'package:flight_tracker/data/model/storage_flight.dart';
 import 'package:flight_tracker/domain/repository/database_repository.dart';
@@ -38,21 +39,44 @@ class HomePageCubit extends Cubit<HomePageState> {
       {required String gufi,
       String? messageAdded,
       String? messageFailureAdded}) async {
-    if (await storageFlight.addById(idFlight: gufi)) {
-      emit(state.copyWith(
-          message: messageAdded ?? "flight add", status: HomePageStatus.done));
-    } else {
-      emit(state.copyWith(
-          message: messageFailureAdded ?? "error add fight",
-          status: HomePageStatus.error));
-      return false;
+    Flight? flight = await repoApi.getFlightById(gufi);
+    if (flight != null) {
+      if (await storageFlight.addById(idFlight: flight.id)) {
+        DateTime estimateNotification = flight.airportDeparture.estimateArrival
+            .subtract(const Duration(hours: 3));
+        DateTime estimatedSecondNotification = flight
+            .airportDeparture.estimateArrival
+            .subtract(const Duration(minutes: 30));
+
+        NotificationService().scheduleNotification(
+            id: 2,
+            title: "Ready to FLight?",
+            body:
+                "The flight $gufi departure on: ${flight.airportDeparture.estimateArrival}",
+            listDateNotification: [
+              estimateNotification,
+              estimatedSecondNotification
+            ]);
+
+        emit(state.copyWith(
+            message: messageAdded ?? "flight add",
+            status: HomePageStatus.done));
+      } else {
+        emit(state.copyWith(
+            message: messageFailureAdded ?? "error add fight",
+            status: HomePageStatus.error));
+        return false;
+      }
+      emit(HomePageState(
+          flightsToday: storageFlight.getTodayFlight(),
+          flightsPassed: storageFlight.getPastFlight(),
+          flightsFuture: storageFlight.getFutureFlight(),
+          status: HomePageStatus.work));
+      return true;
     }
-    emit(HomePageState(
-        flightsToday: storageFlight.getTodayFlight(),
-        flightsPassed: storageFlight.getPastFlight(),
-        flightsFuture: storageFlight.getFutureFlight(),
-        status: HomePageStatus.work));
-    return true;
+    emit(state.copyWith(
+        message: "flight not exist", status: HomePageStatus.error));
+    return false;
   }
 
   /// Remove flight by identifier [idFlight]

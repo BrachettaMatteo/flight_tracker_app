@@ -10,8 +10,10 @@ class UIKit {
   static SliverAppBar appBar(
           {required BuildContext context,
           required String title1,
-          required String title2}) =>
-      appBarCustom(context: context, title1: title1, title2: title2);
+          required String title2,
+          List<Widget>? actions}) =>
+      appBarCustom(
+          context: context, title1: title1, title2: title2, actions: actions);
 
   static SnackBar snackBar(
           {required bool isCorrect, required String message}) =>

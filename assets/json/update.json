@@ -1,6 +1,6 @@
 [
   {
-    "flight_date": "2024-01-07",
+    "flight_date": "2024-06-07",
     "flight_status": "active",
     "departure": {
       "airport": "San Francisco International",
@@ -10,9 +10,9 @@
       "terminal": "2",
       "gate": "D11",
       "delay": 2,
-      "scheduled": "2024-07-15T04:22:00+00:00",
-      "estimated": "2024-07-15T04:24:00+00:00",
-      "actual": "2024-01-07T04:20:13+00:00",
+      "scheduled": "2024-06-07T13:11:00+00:00",
+      "estimated": "2024-06-07T13:11:00+00:00",
+      "actual": "2024-01-07T04:13:13+00:00",
       "estimated_runway": "2024-01-07T04:21:13+00:00",
       "actual_runway": "2024-01-07T04:20:13+00:00"
     },
@@ -25,8 +25,8 @@
       "gate": "A22",
       "baggage": "A17",
       "delay": 0,
-      "scheduled": "2024-07-16T04:20:00+00:00",
-      "estimated": "2024-07-16T04:20:00+00:00",
+      "scheduled": "2024-06-07T17:20:00+00:00",
+      "estimated": "2024-06-07T17:20:00+00:00",
       "actual": null,
       "estimated_runway": null,
       "actual_runway": null
@@ -49,7 +49,7 @@
       "icao24": "A0F1BB"
     },
     "live": {
-      "updated": "2024-07-15T10:00:00+00:00",
+      "updated": "2024-06-07T10:00:00+00:00",
       "latitude": 36.2856,
       "longitude": -106.807,
       "altitude": 8846.82,

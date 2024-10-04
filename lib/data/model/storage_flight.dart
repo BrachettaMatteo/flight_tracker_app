@@ -79,8 +79,8 @@ class StorageFlight {
 
   List<Flight> getFutureFlight() {
     List<Flight> out = _storage
-        .where((element) =>
-            element.airportDeparture.estimateArrival.isAfter(DateTime.now()))
+        .where((element) => element.airportDeparture.estimateArrival
+            .isAfter(DateTime.now().copyWith(hour: 24, minute: 59, second: 59)))
         .toList();
     out.toSet().difference(getTodayFlight().toSet()).toList().sort(
         (previous, current) => previous.airportDeparture.estimateArrival
